@@ -5,7 +5,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.one.duanone.R;
 import com.one.duanone.adapter.FragPagerAdapter;
@@ -24,7 +23,6 @@ public class HomeFragment extends BaseFragment {
     private View view;
     private List<BaseFragment> listData;
     private FragPagerAdapter viewPagerAdapter;
-    private ListView lv;
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
