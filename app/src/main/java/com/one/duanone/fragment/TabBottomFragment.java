@@ -52,7 +52,7 @@ public class TabBottomFragment extends BaseFragment implements View.OnClickListe
     }
 
     /**
-     * 设置显示的页面
+     * 设置显示的页面,
      * @param pager
      */
     public void setPager(int pager) {
@@ -67,6 +67,10 @@ public class TabBottomFragment extends BaseFragment implements View.OnClickListe
         changePager(currentPager);
 
     }
+    /**
+     *  回调接口,通知ContentFragment去切换对应的Fragment
+     */
+
     private void changePager(int page){
         if (listener==null)
             return;

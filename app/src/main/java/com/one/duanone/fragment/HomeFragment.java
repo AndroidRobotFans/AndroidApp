@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.one.duanone.R;
 import com.one.duanone.adapter.FragPagerAdapter;
+import com.one.duanone.view.TabIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +24,16 @@ public class HomeFragment extends BaseFragment {
     private View view;
     private List<BaseFragment> listData;
     private FragPagerAdapter viewPagerAdapter;
+    private TabIndicator indicator;
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         listData = new ArrayList<>();
         view = inflater.inflate(R.layout.fragment_inner_view_pager, null);
+
+        indicator = $(R.id.content_indicator);
         viewPager = $(R.id.content_viewPager);
+
         return view;
     }
 

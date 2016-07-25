@@ -36,14 +36,19 @@ public class MainActivity extends BaseActivity {
     private TabBottomFragment.OnChangPagerListener tabListener = new TabBottomFragment.OnChangPagerListener() {
         @Override
         public void onChangPager(int pager) {
-            Log.i(TAG, "onChangPager: "+pager);
+            Log.i(TAG, "onChangPager: " + pager);
             //从数组中那到当前点击所对应的Fragment
             Fragment fragment = fragmentArray[pager];
-            if (!isHave(fragment)){
-                addFragment(contentFragmentId,fragment);
+            if (!isHave(fragment)) {
+                addFragment(contentFragmentId, fragment);
             }
             //显示,并把当前显示的标记
-            showFragment(fragment,true);
+            if (pager == 2) {
+                FindFragment find = (FindFragment) fragment;
+
+                titleFragment.setLeftView(find.getLeftView());
+            }
+            showFragment(fragment, true);
         }
     };
 
@@ -66,10 +71,10 @@ public class MainActivity extends BaseActivity {
         //向TabFragment中添加
         addFragment(tabBottomFragmentId, tabFragment);
         //显示出tabFragment
-        showFragment(tabFragment,false);
+        showFragment(tabFragment, false);
 
         addFragment(titleFragmentId, titleFragment);
-        showFragment(titleFragment,false);
+        showFragment(titleFragment, false);
         //设置Tab的点击监听事件
         tabFragment.setListener(tabListener);
     }

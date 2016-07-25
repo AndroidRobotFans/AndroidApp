@@ -23,4 +23,7 @@ public class TitleFragment extends BaseFragment {
     public void initFragmentData() {
 
     }
+    public void setLeftView(View view){
+
+    }
 }

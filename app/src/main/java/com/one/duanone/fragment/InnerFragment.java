@@ -16,6 +16,7 @@ public class InnerFragment extends BaseFragment {
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.inner_list_view,null);
+
         return view;
     }
 
