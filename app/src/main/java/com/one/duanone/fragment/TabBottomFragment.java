@@ -41,6 +41,7 @@ public class TabBottomFragment extends BaseFragment implements View.OnClickListe
         $(R.id.audit_linear).setOnClickListener(this);
         $(R.id.message_linear).setOnClickListener(this);
 
+        //设置为默认home选中转态
         setPager(0);
         return view;
     }

@@ -29,9 +29,9 @@
     <style name="TabBottomImageStyle">
         <item name="android:clickable">true</item>
         <item name="android:layout_marginTop">2dp</item>
-        <item name="android:layout_width">26dp</item>
+        <item name="android:layout_width">20dp</item>
         <item name="android:layout_marginBottom">2dp</item>
-        <item name="android:layout_height">26dp</item>
+        <item name="android:layout_height">20dp</item>
     </style>
     <!--底部文字样式-->
     <style name="TabBottomTextViewStyle" parent="AllWrapParent">
