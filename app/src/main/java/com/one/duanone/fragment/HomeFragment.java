@@ -5,11 +5,9 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.one.duanone.R;
 import com.one.duanone.adapter.FragPagerAdapter;
-import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +22,6 @@ public class HomeFragment extends BaseFragment {
     private OnPagerChangeListener listener;
     private View view;
     private List<BaseFragment> listData;
-    private TabPageIndicator indicator;
     private FragPagerAdapter viewPagerAdapter;
 
     @Override
@@ -32,7 +29,6 @@ public class HomeFragment extends BaseFragment {
         listData = new ArrayList<>();
         view = inflater.inflate(R.layout.fragment_inner_view_pager, null);
         viewPager = $(R.id.content_viewPager);
-        indicator = $(R.id.inner_indicator);
         return view;
     }
 
@@ -43,9 +39,7 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         public void onPageSelected(int position) {
-           if (indicator != null){
-               indicator.setCurrentItem(position);
-           }
+
         }
 
         @Override
@@ -67,7 +61,6 @@ public class HomeFragment extends BaseFragment {
 
         viewPager.setAdapter(viewPagerAdapter);
 
-        indicator.setViewPager(viewPager);
     }
 
     /**
