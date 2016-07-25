@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="myView">
+        <attr name="text" format="string"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="imageMargin" format="dimension"/>
+        <attr name="imageSrc" format="reference"/>
+        <attr name="isSelected" format="boolean"/>
+        <attr name="textColor" format="reference"/>
+        <attr name="imageBackground" format="reference"/>
+    </declare-styleable>
+
+</resources>

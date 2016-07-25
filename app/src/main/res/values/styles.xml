@@ -1,0 +1,42 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/title_background_yellow</item>
+        <item name="colorPrimaryDark">@color/title_background_yellow</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--水平平分,垂直沾满-->
+    <style name="HorizontalParent">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="TabBottomLinerStyle" parent="HorizontalParent">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <!--水平垂直方向都自适应-->
+    <style name="AllWrapParent">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <!--底部导航栏图片的样式,-->
+    <style name="TabBottomImageStyle">
+        <item name="android:clickable">true</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_width">26dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_height">26dp</item>
+    </style>
+    <!--底部文字样式-->
+    <style name="TabBottomTextViewStyle" parent="AllWrapParent">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@drawable/text_selected</item>
+    </style>
+
+</resources>
