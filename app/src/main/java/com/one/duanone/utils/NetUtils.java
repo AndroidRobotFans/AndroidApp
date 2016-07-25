@@ -1,5 +1,9 @@
 package com.one.duanone.utils;
 
+import com.one.duanone.bean.Pages;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +13,23 @@ import java.util.List;
  */
 public class NetUtils {
 
+    private static final String TAG = NetUtils.class.getSimpleName();
 
-    public static List<String> getForUrlPagerBean(String url) {
-        List<String> list = new ArrayList<>();
+    public static List<Pages> getForUrlPagerBean(String url) {
+        List<Pages> list = new ArrayList<>();
+
         return list;
+    }
+    public static String getUrlString(String url){
+
+        try {
+            URL netPath = new URL(url);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }
