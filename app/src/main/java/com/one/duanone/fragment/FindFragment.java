@@ -11,7 +11,7 @@ import android.widget.TextView;
  * PC: Masterr_Robot.
  * Created by DKL on 2016/7/25  15:10.
  */
-public class FindFragment extends BaseFragment {
+public class FindFragment extends CenterFragment {
     private static final String TAG = FindFragment.class.getSimpleName();
 
     @Override
@@ -27,6 +27,8 @@ public class FindFragment extends BaseFragment {
     public void initFragmentData() {
 
     }
+
+    @Override
     public View getLeftView(){
         ImageView imageView = new ImageView(getContext());
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -36,5 +38,15 @@ public class FindFragment extends BaseFragment {
             }
         });
         return imageView;
+    }
+
+    @Override
+    public View getRightView() {
+        return null;
+    }
+
+    @Override
+    public View getCenterView() {
+        return null;
     }
 }

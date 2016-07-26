@@ -10,7 +10,7 @@ import android.widget.TextView;
  * PC: Masterr_Robot.
  * Created by DKL on 2016/7/25  15:20.
  */
-public class MessageFragment extends BaseFragment {
+public class MessageFragment extends CenterFragment {
 
     private static final String TAG = MessageFragment.class.getSimpleName();
 
@@ -25,5 +25,20 @@ public class MessageFragment extends BaseFragment {
     @Override
     public void initFragmentData() {
 
+    }
+
+    @Override
+    public View getLeftView() {
+        return null;
+    }
+
+    @Override
+    public View getRightView() {
+        return null;
+    }
+
+    @Override
+    public View getCenterView() {
+        return null;
     }
 }

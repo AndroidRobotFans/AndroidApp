@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import com.one.duanone.R;
 import com.one.duanone.adapter.FragPagerAdapter;
+import com.one.duanone.bean.Pages;
+import com.one.duanone.utils.NetUtils;
 import com.one.duanone.view.TabIndicator;
 
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ import java.util.List;
  * PC: Masterr_Robot.
  * Created by DKL on 2016/7/23  13:51.
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends CenterFragment {
 
     private ViewPager viewPager;
     private OnPagerChangeListener listener;
@@ -25,6 +27,8 @@ public class HomeFragment extends BaseFragment {
     private List<BaseFragment> listData;
     private FragPagerAdapter viewPagerAdapter;
     private TabIndicator indicator;
+    private List<Pages> pageData;
+    private static final String pageUrl = "http://lf.snssdk.com/neihan/service/tabs/";
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class HomeFragment extends BaseFragment {
 
         indicator = $(R.id.content_indicator);
         viewPager = $(R.id.content_viewPager);
+        pageData = new ArrayList<>();
 
         return view;
     }
@@ -63,10 +68,51 @@ public class HomeFragment extends BaseFragment {
             InnerFragment innerFragment = new InnerFragment();
             listData.add(innerFragment);
         }
-        viewPagerAdapter = new FragPagerAdapter(getChildFragmentManager(), listData);
+        final NetUtils.NetCallBack callBack = new NetUtils.NetCallBack() {
+            @Override
+            public void succeed() {
+                changeData();
+            }
+
+            @Override
+            public void error(String e) {
+
+            }
+        };
+        //请求网络接口
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                pageData = NetUtils.getForUrlPagerBean(pageUrl, callBack);
+            }
+        }).start();
+
+        viewPagerAdapter = new FragPagerAdapter(getChildFragmentManager(), pageData);
 
         viewPager.setAdapter(viewPagerAdapter);
+        indicator.setViewPager(viewPager);
 
+    }
+
+    private void changeData() {
+
+        viewPagerAdapter.setPagesList(pageData);
+
+    }
+
+    @Override
+    public View getLeftView() {
+        return null;
+    }
+
+    @Override
+    public View getRightView() {
+        return null;
+    }
+
+    @Override
+    public View getCenterView() {
+        return null;
     }
 
     /**
