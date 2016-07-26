@@ -66,6 +66,7 @@ public class TabIndicator extends HorizontalScrollView {
      * 创建,TabView
      *
      * @param count 创建TabView的个数
+     *              dasd
      */
     private void createTabView(int count) {
         for (int i = 0; i < count; i++) {
