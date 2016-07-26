@@ -1,5 +1,6 @@
 package com.one.duanone.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.one.duanone.R;
+import com.one.duanone.activity.PersonalActivity;
 import com.one.duanone.adapter.FragPagerAdapter;
 import com.one.duanone.bean.Pages;
 import com.one.duanone.utils.JsonUtils;
@@ -48,6 +50,13 @@ public class HomeFragment extends CenterFragment {
         pageData = new ArrayList<>();
 
         image = (ImageView) View.inflate(getContext(), R.layout.home_left_image, null);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), PersonalActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
@@ -102,7 +111,7 @@ public class HomeFragment extends CenterFragment {
 
         viewPager.setAdapter(viewPagerAdapter);
         viewPagerAdapter.setPagesList(pageData);
-        indicator.setViewPager(viewPager,pageData);
+        indicator.setViewPager(viewPager);
     }
 
     @Override
