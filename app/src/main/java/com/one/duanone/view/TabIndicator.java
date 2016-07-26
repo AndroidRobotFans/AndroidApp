@@ -18,7 +18,10 @@ import android.widget.TextView;
 
 import com.one.duanone.R;
 import com.one.duanone.adapter.FragPagerAdapter;
+import com.one.duanone.bean.Pages;
 import com.one.duanone.utils.LogUtils;
+
+import java.util.List;
 
 /**
  * PC: Masterr_Robot.
@@ -29,7 +32,7 @@ public class TabIndicator extends HorizontalScrollView {
     private static final String TAG = TabIndicator.class.getSimpleName();
     private LinearLayout linearLayout;
     private ViewPager viewPager;
-    private FragPagerAdapter pagerAdapter;
+    private PagerAdapter pagerAdapter;
     //含有View的个数,根据ViewPage的Adapter;来确定,然后生成count个TextView来做指示器
     private int haveViewCount;
 
@@ -54,8 +57,8 @@ public class TabIndicator extends HorizontalScrollView {
             throw new NullPointerException("ViewPager is not Adapter");
         }
         this.viewPager = viewPager;
-        pagerAdapter = (FragPagerAdapter) viewPager.getAdapter();
-        haveViewCount = pagerAdapter.getCount();
+        pagerAdapter = viewPager.getAdapter();
+        haveViewCount = viewPager.getAdapter().getCount();
         createTabView(haveViewCount);
     }
 
@@ -66,7 +69,6 @@ public class TabIndicator extends HorizontalScrollView {
      */
     private void createTabView(int count) {
         for (int i = 0; i < count; i++) {
-            Log.i(TAG, "createTabView: " + i);
             String title = pagerAdapter.getPageTitle(i).toString();
             TabView tabView = new TabView(getContext(), title);
             //添加到LinearLayout中

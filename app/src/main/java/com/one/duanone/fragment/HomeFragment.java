@@ -46,7 +46,6 @@ public class HomeFragment extends CenterFragment {
         viewPager = $(R.id.content_viewPager);
         indicator = $(R.id.content_indicator);
         pageData = new ArrayList<>();
-        LogUtils.i(TAG, "setLeftView view");
 
         image = (ImageView) View.inflate(getContext(), R.layout.home_left_image, null);
 
@@ -93,7 +92,6 @@ public class HomeFragment extends CenterFragment {
         };
         String jsonStr = Utils.openAssetsFile(context, "pageJson.txt");
         pageData = JsonUtils.getJsonBean(jsonStr, callBack);
-
     }
 
     /**
@@ -101,9 +99,10 @@ public class HomeFragment extends CenterFragment {
      */
     private void changeData() {
         viewPagerAdapter = new FragPagerAdapter(getChildFragmentManager(), pageData);
+
         viewPager.setAdapter(viewPagerAdapter);
         viewPagerAdapter.setPagesList(pageData);
-        indicator.setViewPager(viewPager);
+        indicator.setViewPager(viewPager,pageData);
     }
 
     @Override

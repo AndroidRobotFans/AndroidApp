@@ -48,6 +48,7 @@ public class JsonUtils {
             }else {
                 callBack.error("list is not!!");
             }
+            Log.i(TAG, "getJsonBean: "+ list.size());
             return list;
         } catch (JSONException e) {
             e.printStackTrace();
