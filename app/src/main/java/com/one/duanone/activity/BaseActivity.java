@@ -47,7 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param fragment   添加的Fragment
      */
     public void addFragment(int fragmentId, Fragment fragment) {
-        //判断是否添加过,,没有添加过在添加
+        //判断是否添加过,,没有添加过再添加
         if (!isHave(fragment)) {
             Log.i(TAG, "addFragment: 添加成成功");
             manger.beginTransaction().add(fragmentId, fragment).commit();

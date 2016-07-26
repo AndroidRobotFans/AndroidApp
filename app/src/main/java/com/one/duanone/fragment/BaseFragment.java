@@ -28,4 +28,5 @@ public abstract class BaseFragment extends Fragment {
     public abstract View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     public abstract void initFragmentData();
+
 }

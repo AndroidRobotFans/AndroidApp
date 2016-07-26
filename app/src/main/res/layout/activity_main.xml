@@ -8,18 +8,21 @@
     <FrameLayout
         android:id="@+id/main_fragment_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></FrameLayout>
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/main_fragment_content"
         android:layout_width="match_parent"
         android:layout_below="@+id/main_fragment_title"
         android:layout_height="match_parent"
-        android:layout_above="@+id/main_bottom_tab"></FrameLayout>
+        android:layout_above="@+id/main_bottom_tab">
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/main_bottom_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"></FrameLayout>
+        android:layout_alignParentBottom="true"> </FrameLayout>
 </RelativeLayout>

@@ -4,4 +4,6 @@
     <string name="find_show">发现</string>
     <string name="audit">审核</string>
     <string name="message">消息</string>
+    <string name="essence">精华</string>
+    <string name="attention">关注</string>
 </resources>

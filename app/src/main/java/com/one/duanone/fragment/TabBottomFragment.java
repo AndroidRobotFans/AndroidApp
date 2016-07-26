@@ -24,6 +24,7 @@ public class TabBottomFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.my_bttom_view, null);
 
         imageViewArray[0] = $(R.id.home_image);
@@ -41,7 +42,7 @@ public class TabBottomFragment extends BaseFragment implements View.OnClickListe
         $(R.id.audit_linear).setOnClickListener(this);
         $(R.id.message_linear).setOnClickListener(this);
 
-        //设置为默认home选中转态
+        //设置为默认home选中状态
         setPager(0);
         return view;
     }

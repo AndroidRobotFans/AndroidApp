@@ -4,8 +4,10 @@
     <color name="colorPrimaryDark">#955E5D</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000</color>
+    <color name="gray">#8a8888</color>
     <color name="gray_tab_bg">#F4F5F6</color>
     <color name="title_background_yellow">#DCD9CF</color>
     <color name="white">#FFF</color>
     <color name="coffee">#6B5547</color>
+    <color name="coffee2">#4D4036</color>
 </resources>

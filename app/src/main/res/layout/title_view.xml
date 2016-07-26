@@ -6,15 +6,10 @@
                 android:layout_height="50dp">
 
     <RelativeLayout
+        android:id="@+id/title_left_iv"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/default_round_head"
-            android:layout_marginLeft="@dimen/margin_10dp"/>
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -26,11 +21,13 @@
             android:padding="@dimen/padding_5dp">
 
             <RadioButton
+                android:id="@+id/title_pick_rb"
                 style="@style/TopRadioButtonStyle"
                 android:background="@drawable/selector_top_middle_radiogroup_left"
                 android:text="精选"/>
 
             <RadioButton
+                android:id="@+id/title_attention_rb"
                 style="@style/TopRadioButtonStyle"
                 android:background="@drawable/selector_top_middle_radiogroup_right"
                 android:text="关注"/>
@@ -48,6 +45,7 @@
             android:layout_centerInParent="true"/>
 
         <ImageView
+            android:id="@+id/title_right_iv"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
