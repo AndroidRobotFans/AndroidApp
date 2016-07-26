@@ -1,10 +1,13 @@
 package com.one.duanone.adapter;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.one.duanone.bean.Pages;
 import com.one.duanone.fragment.BaseFragment;
+import com.one.duanone.fragment.InnerFragment;
 
 import java.util.List;
 
@@ -15,15 +18,23 @@ import java.util.List;
 public class FragPagerAdapter extends FragmentPagerAdapter {
 
     private List<BaseFragment> list;
+    private List<Pages> pagesList;
 
-    public FragPagerAdapter(FragmentManager fm, List<BaseFragment> list) {
+    public FragPagerAdapter(FragmentManager fm, List<Pages> pagesList) {
         super(fm);
-        this.list = list;
+        this.pagesList = pagesList;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return list.get(position);
+        if (pagesList.isEmpty()) {
+            return null;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString("url", pagesList.get(position).getPageUrl());
+        InnerFragment fragment = new InnerFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -31,8 +42,13 @@ public class FragPagerAdapter extends FragmentPagerAdapter {
         return list.size();
     }
 
+    public void setPagesList(List<Pages> pagesList) {
+        this.pagesList = pagesList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public CharSequence getPageTitle(int position) {
-        return "标题" + position;
+        return pagesList.isEmpty() ? "" : pagesList.get(position).getPageTitle();
     }
 }
