@@ -1,6 +1,8 @@
 package com.one.duanone.fragment;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,10 +15,23 @@ import android.view.ViewGroup;
  */
 public abstract class BaseFragment extends Fragment {
 
-    @Nullable
+    public Activity mActivity;
+    public Context context;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mActivity = getActivity();
+        context = getContext();
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return getFragmentView(inflater, container, savedInstanceState);
+
+        View view = getFragmentView(inflater, container, savedInstanceState);
+
+        return view;
     }
 
     @Override

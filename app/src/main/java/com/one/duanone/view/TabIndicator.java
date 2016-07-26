@@ -1,15 +1,24 @@
 package com.one.duanone.view;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.one.duanone.R;
+import com.one.duanone.adapter.FragPagerAdapter;
+import com.one.duanone.utils.LogUtils;
 
 /**
  * PC: Masterr_Robot.
@@ -17,9 +26,11 @@ import com.one.duanone.R;
  */
 public class TabIndicator extends HorizontalScrollView {
 
+    private static final String TAG = TabIndicator.class.getSimpleName();
     private LinearLayout linearLayout;
     private ViewPager viewPager;
-    private PagerAdapter pagerAdapter;
+    private FragPagerAdapter pagerAdapter;
+    //含有View的个数,根据ViewPage的Adapter;来确定,然后生成count个TextView来做指示器
     private int haveViewCount;
 
     public TabIndicator(Context context) {
@@ -28,14 +39,22 @@ public class TabIndicator extends HorizontalScrollView {
 
     public TabIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
-        linearLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.indicator_parent, this);
+        linearLayout = (LinearLayout) View.inflate(context, R.layout.indication_layout, null);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 50);
+        //设置LinearLayout的样式
+        linearLayout.setLayoutParams(lp);
+        this.addView(linearLayout);
     }
 
     public void setViewPager(ViewPager viewPager) {
         if (viewPager == null) {
             throw new NullPointerException("ViewPager is not!");
         }
-        pagerAdapter = viewPager.getAdapter();
+        if (viewPager.getAdapter() == null) {
+            throw new NullPointerException("ViewPager is not Adapter");
+        }
+        this.viewPager = viewPager;
+        pagerAdapter = (FragPagerAdapter) viewPager.getAdapter();
         haveViewCount = pagerAdapter.getCount();
         createTabView(haveViewCount);
     }
@@ -47,16 +66,27 @@ public class TabIndicator extends HorizontalScrollView {
      */
     private void createTabView(int count) {
         for (int i = 0; i < count; i++) {
-            TabView tabView = new TabView(getContext());
+            Log.i(TAG, "createTabView: " + i);
+            String title = pagerAdapter.getPageTitle(i).toString();
+            TabView tabView = new TabView(getContext(), title);
             //添加到LinearLayout中
             linearLayout.addView(tabView);
         }
     }
 
     class TabView extends TextView {
-
-        public TabView(Context context) {
+        public TabView(Context context, String title) {
             super(context);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
+            lp.gravity = Gravity.CENTER;
+            lp.weight = 1;
+            lp.setMargins(20, 5, 20, 5);
+            Log.i(TAG, "TabView: 创建TextView" + title);
+            this.setGravity(Gravity.CENTER);
+            this.setText(title);
+            this.setLayoutParams(lp);
+
         }
     }
 }

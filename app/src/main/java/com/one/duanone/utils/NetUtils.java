@@ -22,10 +22,14 @@ public class NetUtils {
 
     public static List<Pages> getForUrlPagerBean(String url, NetCallBack callBack) {
         List<Pages> list = new ArrayList<>();
-        StringBuffer jsonStr = getUrlString(url, callBack);
-        list = JsonUtils.getJsonBean(jsonStr.toString(), callBack);
+        String jsonStr = getUrlString(url, callBack);
+        list = JsonUtils.getJsonBean(jsonStr, callBack);
         //请求结果回调
-        callBack.succeed();
+        if (list != null) {
+            callBack.succeed();
+        }else {
+            callBack.error("解析失败");
+        }
         return list;
     }
 
@@ -36,7 +40,7 @@ public class NetUtils {
      * @param callBack
      * @return
      */
-    public static StringBuffer getUrlString(String url, NetCallBack callBack) {
+    public static String getUrlString(String url, NetCallBack callBack) {
         InputStream inputStream = null;
         InputStreamReader inputStreamReader = null;
         try {
@@ -53,12 +57,13 @@ public class NetUtils {
             inputStream = connection.getInputStream();
             inputStreamReader = new InputStreamReader(inputStream);
             StringBuffer sb = new StringBuffer();
+
             char[] buffer = new char[512];
             int len = 0;
             while ((len = inputStreamReader.read(buffer)) != -1) {
                 sb.append(buffer, 0, len);
             }
-            return sb;
+            return new String(sb.toString().getBytes(), "utf-8");
         } catch (MalformedURLException e) {
             error(callBack, e.getMessage());
         } catch (IOException e) {

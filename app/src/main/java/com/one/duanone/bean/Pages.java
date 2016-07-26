@@ -21,6 +21,17 @@ public class Pages {
     }
 
     public void setPageTitle(String pageTitle) {
+
         this.pageTitle = pageTitle;
+    }
+
+    /**
+     * 重写 toString() 方法, 方便打印log日志, 观察数据解析
+     * @return
+     */
+    @Override
+    public String toString() {
+        String srt = "name: " + pageTitle + ": url: " + pageUrl;
+        return srt;
     }
 }

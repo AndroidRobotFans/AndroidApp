@@ -4,9 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 
 import com.one.duanone.R;
+import com.one.duanone.utils.LogUtils;
 
 /**
  * PC: Masterr_Robot.
@@ -14,35 +15,41 @@ import com.one.duanone.R;
  */
 public class TitleFragment extends BaseFragment {
 
-    public View rightView,centerView;
+    private LinearLayout leftLinear;
+    private int count = 0;
+    private static final String TAG = TitleFragment.class.getSimpleName();
     private View view;
-    private RelativeLayout leftView;
+
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.title_view,null);
-        leftView= (RelativeLayout) view.findViewById(R.id.title_left_iv);
-        rightView=view.findViewById(R.id.title_right_iv);
-        centerView=view.findViewById(R.id.title_pick_rb);
+        view = inflater.inflate(R.layout.title_view, null);
         return view;
     }
 
-
     @Override
     public void initFragmentData() {
-
+        leftLinear = (LinearLayout) view.findViewById(R.id.title_left_relative);
     }
 
-    public void setLeftView(View view){
-        if (leftView!=null && view!=null){
-            leftView.removeAllViews();
-            leftView.addView(view);
+    /**
+     * 设置View
+     *
+     * @param view
+     */
+    public void setLeftView(View view) {
+        if (leftLinear != null && view != null) {
+            leftLinear.removeAllViews();
+            leftLinear.addView(view);
         }
-        boolean is=leftView==null;
+        boolean is = leftLinear == null;
+        LogUtils.i(TAG, "setLeftView: " + is + ": count: " + count++);
     }
-    public void setRightView(View view){
-        rightView=view;
+
+    public void setRightView(View view) {
+
     }
-    public void setCenterView(View view){
-       centerView=view;
+
+    public void setCenterView(View view) {
+
     }
 }

@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class FragPagerAdapter extends FragmentPagerAdapter {
 
-    private List<BaseFragment> list;
     private List<Pages> pagesList;
 
     public FragPagerAdapter(FragmentManager fm, List<Pages> pagesList) {
@@ -39,7 +38,7 @@ public class FragPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return list.size();
+        return pagesList.size();
     }
 
     public void setPagesList(List<Pages> pagesList) {
@@ -49,6 +48,9 @@ public class FragPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return pagesList.isEmpty() ? "" : pagesList.get(position).getPageTitle();
+        if (pagesList.isEmpty()) {
+            return "";
+        }
+        return pagesList.get(position).getPageTitle();
     }
 }

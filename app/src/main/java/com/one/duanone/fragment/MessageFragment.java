@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.one.duanone.R;
 
 /**
  * PC: Masterr_Robot.
@@ -13,12 +16,14 @@ import android.widget.TextView;
 public class MessageFragment extends CenterFragment {
 
     private static final String TAG = MessageFragment.class.getSimpleName();
+    private ImageView leftImage;
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         TextView textView = new TextView(getContext());
         textView.setText(TAG);
+        leftImage = (ImageView) View.inflate(getContext(), R.layout.message_left_image, null);
         return textView;
     }
 
@@ -29,7 +34,7 @@ public class MessageFragment extends CenterFragment {
 
     @Override
     public View getLeftView() {
-        return null;
+        return leftImage;
     }
 
     @Override

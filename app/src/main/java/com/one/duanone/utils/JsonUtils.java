@@ -1,5 +1,8 @@
 package com.one.duanone.utils;
 
+import android.nfc.Tag;
+import android.util.Log;
+
 import com.one.duanone.bean.Pages;
 
 import org.json.JSONArray;
@@ -15,6 +18,8 @@ import java.util.List;
  */
 public class JsonUtils {
 
+    private static final String TAG = JsonUtils.class.getSimpleName();
+
     /**
      * 通过json解析出每个页面的title和对应的网址
      *
@@ -23,20 +28,29 @@ public class JsonUtils {
      * @return
      */
     public static List<Pages> getJsonBean(String jsonStr, NetUtils.NetCallBack callBack) {
+
         List<Pages> list = new ArrayList<>();
         try {
-            JSONObject obj = new JSONObject(jsonStr);
-            JSONArray data = obj.getJSONArray("data");
+            JSONObject jsonObj = new JSONObject(jsonStr);
+            JSONArray data = jsonObj.getJSONArray("data");
             for (int i = 0; i < data.length(); i++) {
                 JSONObject object = data.getJSONObject(i);
                 Pages pages = new Pages();
-                pages.setPageUrl(object.getString("url"));
-                pages.setPageTitle("name");
+                String url = object.getString("url");
+                String name = object.getString("name");
+                pages.setPageTitle(name);
+                pages.setPageUrl(url);
                 list.add(pages);
+                Log.i(TAG, "getJsonBean: " + pages.toString());
+            }
+            if (list !=null){
+                callBack.succeed();
+            }else {
+                callBack.error("list is not!!");
             }
             return list;
         } catch (JSONException e) {
-            error(callBack, e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
