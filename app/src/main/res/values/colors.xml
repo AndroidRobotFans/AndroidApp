@@ -10,4 +10,5 @@
     <color name="white">#FFF</color>
     <color name="coffee">#6B5547</color>
     <color name="coffee2">#4D4036</color>
+    <color name="trans_gray">#33cccccc</color>
 </resources>

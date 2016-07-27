@@ -52,4 +52,11 @@
         <item name="android:button">@null</item>
     </style>
 
+    <!-- 发现页面的listview的Item -->
+    <style name="FindFragmentItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">3dp</item>
+    </style>
+
 </resources>

@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.one.duanone.R;
 import com.one.duanone.fragment.AuditFragment;
-import com.one.duanone.fragment.BaseFragment;
 import com.one.duanone.fragment.CenterFragment;
 import com.one.duanone.fragment.FindFragment;
 import com.one.duanone.fragment.HomeFragment;
@@ -20,11 +19,19 @@ public class MainActivity extends BaseActivity {
 
     private TabBottomFragment tabFragment;
     private TitleFragment titleFragment;
-    private BaseFragment[] fragmentArray = new BaseFragment[4];
+    private CenterFragment[] fragmentArray = new CenterFragment[4];
 
     private int titleFragmentId;
     private int contentFragmentId;
     private int tabBottomFragmentId;
+
+    private CenterFragment.ChangeFrage changeFrage = new CenterFragment.ChangeFrage() {
+        @Override
+        public void showFragment(Fragment fragment) {
+            addFragment(contentFragmentId, fragment);
+            showFragment(fragment);
+        }
+    };
 
 
     @Override
@@ -75,6 +82,10 @@ public class MainActivity extends BaseActivity {
         fragmentArray[1] = new FindFragment();
         fragmentArray[2] = new AuditFragment();
         fragmentArray[3] = new MessageFragment();
+
+        for (int i = 0; i < fragmentArray.length; i++) {
+            fragmentArray[i].setChangFragment(changeFrage);
+        }
 
         //设置Tab的点击监听事件
         tabFragment.setListener(tabListener);

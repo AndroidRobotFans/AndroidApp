@@ -14,7 +14,6 @@ import com.one.duanone.activity.PersonalActivity;
 import com.one.duanone.adapter.FragPagerAdapter;
 import com.one.duanone.bean.Pages;
 import com.one.duanone.utils.JsonUtils;
-import com.one.duanone.utils.LogUtils;
 import com.one.duanone.utils.NetUtils;
 import com.one.duanone.utils.Utils;
 import com.one.duanone.view.TabIndicator;
