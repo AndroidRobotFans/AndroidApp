@@ -44,7 +44,7 @@ public class JsonUtils {
                 Log.i(TAG, "getJsonBean: " + pages.toString());
             }
             if (list !=null){
-                callBack.succeed();
+//                callBack.succeed();
             }else {
                 callBack.error("list is not!!");
             }

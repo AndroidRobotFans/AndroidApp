@@ -106,6 +106,7 @@ public class HomeFragment extends CenterFragment {
         };
         String jsonStr = Utils.openAssetsFile(context, "pageJson.txt");
         pageData = JsonUtils.getJsonBean(jsonStr, callBack);
+        changeData();
     }
 
     /**
