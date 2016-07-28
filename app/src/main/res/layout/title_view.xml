@@ -12,51 +12,35 @@
 
         <LinearLayout
             android:id="@+id/title_left_relative"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:orientation="vertical"
             android:gravity="center_vertical"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/margin_10dp"></LinearLayout>
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="@dimen/margin_3dp"
-            android:layout_centerInParent="true"
-            android:padding="@dimen/padding_5dp">
-
-            <RadioButton
-                style="@style/TopRadioButtonStyle"
-                android:background="@drawable/selector_top_middle_radiogroup_left"
-                android:text="精选"/>
-
-            <RadioButton
-                style="@style/TopRadioButtonStyle"
-                android:background="@drawable/selector_top_middle_radiogroup_right"
-                android:text="关注"/>
-        </RadioGroup>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:visibility="gone"
-            android:gravity="center"
-            android:text="审核"
-            android:textColor="@color/coffee"
-            android:textSize="@dimen/font_size_16sp"
-            android:layout_centerInParent="true"/>
-
-        <ImageView
-            android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_10dp"> </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/title_center_relative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            >
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/title_right_relative"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_publish_bottom_night"/>
+            android:gravity="center"
+            android:paddingRight="10dp"
+            >
+
+        </RelativeLayout>
+
+
     </RelativeLayout>
 
 </RelativeLayout>

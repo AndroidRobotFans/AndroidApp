@@ -3,7 +3,15 @@
     <string name="home_page">首页</string>
     <string name="find_show">发现</string>
     <string name="audit">审核</string>
+    <string name="hotspot">热吧</string>
+    <string name="subscription">订阅</string>
     <string name="message">消息</string>
-    <string name="essence">精华</string>
+    <string name="essence">精选</string>
     <string name="attention">关注</string>
+    <string name="blacklist">黑名单</string>
+    <string name="contribute">投稿互动</string>
+    <string name="system">系统消息</string>
+    <string name="fans">粉丝关注</string>
+    <string name="date">约起来吧</string>
+    <string name="pillow">去TA的主页就可以发悄悄话哦！</string>
 </resources>

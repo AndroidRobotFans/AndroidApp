@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.one.duanone.R;
@@ -42,10 +43,14 @@ public class FindFragment extends CenterFragment {
 
     private static final String TAG = FindFragment.class.getSimpleName();
     private ImageView leftImage;
+    private ImageView rightImage;
+    private RadioGroup centerRadioGroup;
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         leftImage = (ImageView) View.inflate(getContext(), R.layout.find_left_image, null);
+        rightImage = (ImageView) View.inflate(getContext(), R.layout.find_right_image, null);
+        centerRadioGroup = (RadioGroup) View.inflate(getContext(), R.layout.find_center_radiogroup, null);
         //实例化ListView的控件
         mView = View.inflate(getContext(), R.layout.fragment_find, null);
         mListView = $(R.id.fragment_find_listview);
@@ -162,12 +167,12 @@ public class FindFragment extends CenterFragment {
 
     @Override
     public View getRightView() {
-        return null;
+        return rightImage;
     }
 
     @Override
     public View getCenterView() {
-        return null;
+        return centerRadioGroup;
     }
 
     /**

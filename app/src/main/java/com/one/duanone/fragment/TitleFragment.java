@@ -1,10 +1,16 @@
 package com.one.duanone.fragment;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.one.duanone.R;
 import com.one.duanone.utils.LogUtils;
@@ -16,6 +22,8 @@ import com.one.duanone.utils.LogUtils;
 public class TitleFragment extends BaseFragment {
 
     private LinearLayout leftLinear;
+    private RelativeLayout centerRelative;
+    private RelativeLayout rightRelative;
     private int count = 0;
     private static final String TAG = TitleFragment.class.getSimpleName();
     private View view;
@@ -29,6 +37,8 @@ public class TitleFragment extends BaseFragment {
     @Override
     public void initFragmentData() {
         leftLinear = (LinearLayout) view.findViewById(R.id.title_left_relative);
+        centerRelative = (RelativeLayout) view.findViewById(R.id.title_center_relative);
+        rightRelative = (RelativeLayout) view.findViewById(R.id.title_right_relative);
     }
 
     /**
@@ -46,10 +56,17 @@ public class TitleFragment extends BaseFragment {
     }
 
     public void setRightView(View view) {
+        if (rightRelative!=null && view!=null){
+            rightRelative.removeAllViews();
+            rightRelative.addView(view);
+        }
 
     }
 
     public void setCenterView(View view) {
-
+        if (centerRelative != null && view !=null ){
+            centerRelative.removeAllViews();
+            centerRelative.addView(view);
+        }
     }
 }

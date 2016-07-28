@@ -5,10 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.one.duanone.R;
 import com.one.duanone.adapter.RollVPAdapter;
 import com.one.duanone.view.AuditViewPager;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +31,13 @@ public class AuditFragment extends CenterFragment {
 
     private static final String TAG = AuditFragment.class.getSimpleName();
     private ImageView leftImage;
+    private ImageView rightImage;
+    private TextView centerTextView;
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         leftImage = (ImageView) View.inflate(getContext(), R.layout.audit_left_image,null);
+        rightImage = (ImageView) View.inflate(getContext(), R.layout.home_right_image,null);
+        centerTextView = (TextView) View.inflate(getContext(), R.layout.audit_center_text,null);
         mView = View.inflate(getContext(), R.layout.fragment_audit, null);
         mViewPager = (AuditViewPager) mView.findViewById(R.id.fragment_audit_viewpager);
         mImageList = new ArrayList<>();
@@ -59,11 +67,11 @@ public class AuditFragment extends CenterFragment {
 
     @Override
     public View getRightView() {
-        return null;
+        return rightImage;
     }
 
     @Override
     public View getCenterView() {
-        return null;
+        return centerTextView;
     }
 }
