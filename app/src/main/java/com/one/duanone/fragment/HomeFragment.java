@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import com.one.duanone.R;
 import com.one.duanone.activity.PersonalActivity;
@@ -36,6 +37,8 @@ public class HomeFragment extends CenterFragment {
     private TabIndicator indicator;
     private List<Pages> pageData;
     private ImageView image;
+    private RadioGroup centerRadioGroup;
+    private ImageView rightImage;
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +51,10 @@ public class HomeFragment extends CenterFragment {
         indicator = $(R.id.content_indicator);
         pageData = new ArrayList<>();
 
+
+        centerRadioGroup = (RadioGroup) View.inflate(getContext(), R.layout.home_center_radiogroup, null);
         image = (ImageView) View.inflate(getContext(), R.layout.home_left_image, null);
+        rightImage= (ImageView) View.inflate(getContext(),R.layout.home_right_image,null);
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +106,7 @@ public class HomeFragment extends CenterFragment {
         };
         String jsonStr = Utils.openAssetsFile(context, "pageJson.txt");
         pageData = JsonUtils.getJsonBean(jsonStr, callBack);
+        changeData();
     }
 
     /**
@@ -120,12 +127,12 @@ public class HomeFragment extends CenterFragment {
 
     @Override
     public View getRightView() {
-        return null;
+        return rightImage;
     }
 
     @Override
     public View getCenterView() {
-        return null;
+        return centerRadioGroup;
     }
 
     /**

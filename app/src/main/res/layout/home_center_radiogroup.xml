@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_centerVertical="true"
+    android:layout_marginBottom="@dimen/margin_3dp"
+    android:layout_centerInParent="true"
+    android:padding="@dimen/padding_5dp">
+
+    <RadioButton
+        style="@style/TopRadioButtonStyle"
+        android:background="@drawable/selector_top_middle_radiogroup_left"
+        android:text="@string/essence"/>
+
+    <RadioButton
+        style="@style/TopRadioButtonStyle"
+        android:background="@drawable/selector_top_middle_radiogroup_right"
+        android:text="@string/attention"/>
+
+</RadioGroup>
