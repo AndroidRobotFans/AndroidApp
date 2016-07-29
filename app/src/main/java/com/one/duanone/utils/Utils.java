@@ -1,8 +1,11 @@
 package com.one.duanone.utils;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.os.Environment;
 import android.util.Log;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -41,4 +44,18 @@ public class Utils {
         }
         return null;
     }
+
+    public static Cursor getFileDb(String fileName){
+
+        File sd = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
+
+        File dbFile = new File(sd,fileName);
+
+
+
+        return null;
+    }
+
+
+
 }
