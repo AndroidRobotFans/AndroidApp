@@ -6,9 +6,21 @@ package com.one.duanone.bean;
  */
 public class News {
 
+    /**
+     * 消息类型. 有message的是普通类型, 没有的是直播
+     */
     private String message;
+    /**
+     * 一次更新了几条数据
+     */
     private String tip;
+    /**
+     * 除了每条消息内容等属性, 都存在group里面
+     */
     private Group group;
+    /**
+     * 直播对象
+     */
     private LiveNew liveNew;
 
 
@@ -45,18 +57,80 @@ public class News {
     }
 
     public static class Group {
+        /**
+         * 类型:
+         */
         private int type;
+        /**
+         * 用户, 发消息的用户, 没有则是匿名
+         */
         private User user;
+        /**
+         * 消息类型 0 - 4
+         * 0: 纯文本
+         * 1: 只有图片
+         * 2: git 图
+         * 3: 视频
+         * 4: 图片
+         */
         private int media_type;
+        /**
+         * 踩数
+         */
         private int bury_count;
+        /**
+         * 内容分类的 id:  如每日精选, 今天张这样等
+         */
         private int category_id;
+        /**
+         * 评论数量
+         */
         private int comment_count;
+        /**
+         * 点赞数
+         */
         private int digg_count;
+        /**
+         * 收藏数
+         */
         private int favorite_count;
+        /**
+         * 忘记了
+         */
         private int go_detail_count;
+        /**
+         * 组id:
+         */
         private int group_id;
+        /**
+         * 分享次数
+         */
         private int share_count;
+        /**
+         * 图片类型的内容
+         */
         private ImageNew imageNew;
+
+        /**
+         * 视屏消息的内容
+         */
+        private OriginVideo originVideo;
+
+        public OriginVideo getOriginVideo() {
+            return originVideo;
+        }
+
+        public void setOriginVideo(OriginVideo originVideo) {
+            this.originVideo = originVideo;
+        }
+
+        public ImageNew getImageNew() {
+            return imageNew;
+        }
+
+        public void setImageNew(ImageNew imageNew) {
+            this.imageNew = imageNew;
+        }
 
         public int getShare_count() {
             return share_count;
@@ -184,11 +258,26 @@ public class News {
         }
     }
 
+    /**
+     * 视频类型
+     */
     public static class OriginVideo {
 
+        /**
+         * 播放次数
+         */
         private int play_count;
+        /**
+         * 视频封面image地址
+         */
         private String medium_cover_url;
+        /**
+         * 视频地址
+         */
         private String origin_video_url;
+        /**
+         * 视频时长 单位是: 秒"
+         */
         private float duration;
 
         public int getPlay_count() {
@@ -225,12 +314,21 @@ public class News {
     }
 
     /**
-     * yong hu
+     * 用户信息
      */
     public static class User {
 
+        /**
+         * 用户名字
+         */
         private String name;
+        /**
+         * 用户ID
+         */
         private int user_id;
+        /**
+         * 用户头像URL
+         */
         private String avatar_url;
 
         public String getName() {
@@ -258,15 +356,45 @@ public class News {
         }
     }
 
+    /**
+     * 直播类型的内容
+     */
     public static class LiveNew {
+
+        /**
+         * 直播的信息请求URL
+         */
         private String liveUrl;
+        /**
+         * 直播封面图 url
+         */
         private String imgUrl;
+        /**
+         * 房主地址
+         */
         private String city;
+        /**
+         * 粉丝数量
+         */
         private int fan_ticket_count;
+        /**
+         * 在线人数
+         */
         private int fan_ticket;
+
+        /**
+         * 主播星座
+
+         */
         private String birthday_description;
+        /**
+         * 主播的信息
+         */
         private User user;
 
+        public LiveNew() {
+            user = new User();
+        }
 
         public String getLiveUrl() {
             return liveUrl;
@@ -360,6 +488,15 @@ public class News {
         if (group == null) {
             return "null";
         }
-        return "用户：" + group.getUser().getName() + "：消息类型：" + group.getMedia_type() + ": 内容：" + group.getContent();
+        String content = "用户：" + group.getUser().getName() + "：消息类型：" + group.getMedia_type() + ": 内容：" + group.getContent();
+        if (message != null) {
+            if (getGroup().getMedia_type() == 3) {
+                return content + ": 视频地址: " + getGroup().getOriginVideo().getOrigin_video_url();
+            }
+            if (getGroup().getMedia_type() == 1 || getGroup().getMedia_type() == 2 || getGroup().getMedia_type() == 4) {
+                return content + ": 图片地址: " + getGroup().getImageNew().getImgUrl();
+            }
+        }
+        return content;
     }
 }
