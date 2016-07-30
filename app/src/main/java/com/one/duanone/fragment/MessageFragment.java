@@ -1,14 +1,19 @@
 package com.one.duanone.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.one.duanone.R;
 import com.one.duanone.activity.PersonalActivity;
@@ -21,34 +26,17 @@ public class MessageFragment extends CenterFragment {
 
     private static final String TAG = MessageFragment.class.getSimpleName();
 
+
     private ImageView leftImage;
     private TextView rightText;
     private TextView centerText;
-    private FragmentManager messageFragment;
-    private android.support.v4.app.FragmentTransaction ft;
+
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view=View.inflate(getContext(),R.layout.message_view,null);
 
-        leftImage = (ImageView) View.inflate(getContext(), R.layout.message_left_image, null);
-        leftImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), PersonalActivity.class);
-                startActivity(intent);
-            }
-        });
-        boolean image = leftImage ==null;
-        Log.i(TAG, "setLeftView: 初始化View: image : "+ image);
-        centerText= (TextView) View.inflate(getContext(),R.layout.message_center_text,null);
-        rightText= (TextView) View.inflate(getContext(),R.layout.message_right_text,null);
-        rightText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         return view;
     }
@@ -56,7 +44,30 @@ public class MessageFragment extends CenterFragment {
     @Override
     public void initFragmentData() {
 
+        leftImage = (ImageView) View.inflate(getActivity(), R.layout.message_left_image, null);
+        leftImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), PersonalActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        boolean image = leftImage ==null;
+        Log.i(TAG, "setLeftView: 初始化View: image : "+ image);
+        centerText= (TextView) View.inflate(getActivity(),R.layout.message_center_text,null);
+        rightText= (TextView) View.inflate(getActivity(),R.layout.message_right_text,null);
+        rightText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener!=null){
+                    listener.showFragment();
+                }
+
+            }
+        });
+
+        Log.i(TAG, "getFragmentView: ");
     }
 
     @Override
@@ -77,5 +88,11 @@ public class MessageFragment extends CenterFragment {
     public View getCenterView() {
         return centerText;
     }
+
+
+    public interface ShowCenterFragment{
+        void showFragment();
+    }
+
 
 }

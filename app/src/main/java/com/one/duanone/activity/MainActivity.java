@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.one.duanone.R;
 import com.one.duanone.fragment.AuditFragment;
+import com.one.duanone.fragment.BlackListFragment;
 import com.one.duanone.fragment.CenterFragment;
 import com.one.duanone.fragment.FindFragment;
 import com.one.duanone.fragment.HomeFragment;
@@ -30,6 +31,20 @@ public class MainActivity extends BaseActivity {
         public void showFragment(Fragment fragment) {
             addFragment(contentFragmentId, fragment);
             showFragment(fragment);
+        }
+    };
+    private BlackListFragment blackListFragment;
+    private MessageFragment.ShowCenterFragment messageListener=new MessageFragment.ShowCenterFragment() {
+        @Override
+        public void showFragment() {
+            showCenterAndHidt(blackListFragment,tabFragment,contentFragmentId);
+        }
+    };
+    private BlackListFragment.OnBackListener blackListener = new BlackListFragment.OnBackListener() {
+        @Override
+        public void onBack() {
+            showFragment(fragmentArray[3],true);
+            showFragment(tabFragment,false);
         }
     };
 
@@ -66,6 +81,10 @@ public class MainActivity extends BaseActivity {
         fragmentArray[2] = new AuditFragment();
         fragmentArray[3] = new MessageFragment();
 
+        blackListFragment = new BlackListFragment();
+
+        blackListFragment.setBackLisener(blackListener);
+
         tabFragment = new TabBottomFragment();
         titleFragment = new TitleFragment();
 
@@ -88,8 +107,12 @@ public class MainActivity extends BaseActivity {
             fragmentArray[i].setChangFragment(changeFrage);
         }
 
+
+
         //设置Tab的点击监听事件
         tabFragment.setListener(tabListener);
+
+        fragmentArray[3].setShowListener(messageListener);
 
 //       tabFragment.setPager(0);
     }

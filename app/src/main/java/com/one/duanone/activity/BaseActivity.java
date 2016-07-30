@@ -28,19 +28,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 添加整个Fragment数组
-     *
-     * @param fragments
-     */
-    public void addFragmentArray(BaseFragment[] fragments, int fragmentId) {
-        for (BaseFragment baseFragment : fragments) {
-            //遍历每一个,然后添加
-            Log.i(TAG, "addFragmentArray: 添加");
-            addFragment(fragmentId, baseFragment);
-        }
-    }
-
-    /**
      * 添加fragment
      *
      * @param fragmentId 添加的目标 FragmentLayout ID
@@ -91,11 +78,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         manger.beginTransaction().hide(fragment).commit();
     }
 
+    /**
+     * 替换fragment
+     * @param show   要显示的fragment
+     * @param hidden 要隐藏的fragment
+     * @param fragmentId 中间的framelayout
+     */
     public void showCenterAndHidt(Fragment show,Fragment hidden,int fragmentId){
-        hidden(hidden);
-        addFragment(fragmentId,show);
+       if (!isHave(show)){
+           manger.beginTransaction().addToBackStack(null).add(fragmentId,show).commit();
+       }
         showFragment(show,true);
+        hidden(hidden);
     }
+
+
 
     /**
      * 判断fragment是否添加过

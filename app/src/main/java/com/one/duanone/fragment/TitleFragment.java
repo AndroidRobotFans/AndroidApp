@@ -47,35 +47,32 @@ public class TitleFragment extends BaseFragment {
      */
 
 
-    private OnChangeTitleView listener=new OnChangeTitleView() {
+    private OnChangeTitleView listener = new OnChangeTitleView() {
         public void setLeftView(View view) {
-            if (leftLinear != null && view != null) {
-
-                leftLinear.removeAllViews();
-
-                leftLinear.addView(view,lp);
+            leftLinear.removeAllViews();
+            if (view == null) return;
+            if (leftLinear != null) {
+                leftLinear.addView(view, lp);
             }
-            boolean viws = view==null;
+            boolean viws = view == null;
             boolean is = leftLinear == null;
-            LogUtils.i(TAG, "setLeftView: " + is + ": count: " + count++ +": View: " + viws);
+            LogUtils.i(TAG, "setLeftView: " + is + ": count: " + count++ + ": View: " + viws);
         }
 
         public void setRightView(View view) {
-            if (rightRelative!=null && view!=null){
 
-                rightRelative.removeAllViews();
-
-                rightRelative.addView(view,lp);
+            rightRelative.removeAllViews();
+            if (view == null) return;
+            if (rightRelative != null) {
+                rightRelative.addView(view, lp);
             }
-
         }
 
         public void setCenterView(View view) {
-            if (centerRelative != null && view !=null ){
-
-                centerRelative.removeAllViews();
-
-                centerRelative.addView(view,lp);
+            centerRelative.removeAllViews();
+            if (view == null) return;
+            if (centerRelative != null) {
+                centerRelative.addView(view, lp);
             }
         }
     };
@@ -84,10 +81,12 @@ public class TitleFragment extends BaseFragment {
         return listener;
     }
 
-    public interface OnChangeTitleView{
+    public interface OnChangeTitleView {
         void setLeftView(View view);
-         void setRightView(View view);
-         void setCenterView(View view);
+
+        void setRightView(View view);
+
+        void setCenterView(View view);
     }
 
 }
