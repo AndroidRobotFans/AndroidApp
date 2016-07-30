@@ -58,9 +58,9 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 显示fragment
      *
      * @param fragment
-     * @param isAdd    是否标记为当前显示的Fragment, 值用于Content中的Fragment
+     * @param isShowCenter    是否标记为当前显示的Fragment, 值用于Content中的Fragment
      */
-    public void showFragment(Fragment fragment, boolean isAdd) {
+    public void showFragment(Fragment fragment, boolean isShowCenter) {
         //如果fragment为空
         if (fragment == null) {
             Log.i(TAG, "showFragment:fragment为空");
@@ -70,13 +70,13 @@ public abstract class BaseActivity extends AppCompatActivity {
             //已经显示, 就直接return
             return;
         }
-        if (currentShowFragment != null && isAdd) {
+        if (currentShowFragment != null && isShowCenter) {
             //不为空就直接隐藏当前的
             hidden(currentShowFragment);
         }
         Log.i(TAG, "showFragment: 显示成功");
         manger.beginTransaction().show(fragment).commit();
-        if (isAdd) {
+        if (isShowCenter) {
             currentShowFragment = fragment;
         }
     }

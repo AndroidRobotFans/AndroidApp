@@ -7,6 +7,7 @@
     <com.one.duanone.view.TabIndicator
         android:id="@+id/content_indicator"
         android:layout_width="match_parent"
+        android:scrollbars="none"
         android:layout_height="50dp" />
 
     <android.support.v4.view.ViewPager

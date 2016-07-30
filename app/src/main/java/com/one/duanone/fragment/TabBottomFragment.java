@@ -47,10 +47,6 @@ public class TabBottomFragment extends BaseFragment implements View.OnClickListe
         return view;
     }
 
-    @Override
-    public void initFragmentData() {
-
-    }
 
     /**
      * 设置显示的页面,
@@ -73,8 +69,7 @@ public class TabBottomFragment extends BaseFragment implements View.OnClickListe
      */
 
     private void changePager(int page){
-        if (listener==null)
-            return;
+        if (listener==null) return;
         listener.onChangPager(page);
     }
 

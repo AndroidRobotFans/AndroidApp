@@ -1,6 +1,7 @@
 package com.one.duanone.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -15,10 +16,12 @@ import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.one.duanone.R;
 import com.one.duanone.adapter.FragPagerAdapter;
 import com.one.duanone.bean.Pages;
+import com.one.duanone.fragment.HomeFragment;
 import com.one.duanone.utils.LogUtils;
 
 import java.util.List;
@@ -33,8 +36,10 @@ public class TabIndicator extends HorizontalScrollView {
     private LinearLayout linearLayout;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
+    private TextView currentTextView ;
     //含有View的个数,根据ViewPage的Adapter;来确定,然后生成count个TextView来做指示器
     private int haveViewCount;
+    private HomeFragment.OnPagerChangeListener pagerChangeListener;
 
     public TabIndicator(Context context) {
         this(context, null);
@@ -71,10 +76,30 @@ public class TabIndicator extends HorizontalScrollView {
     private void createTabView(int count) {
         for (int i = 0; i < count; i++) {
             String title = pagerAdapter.getPageTitle(i).toString();
-            TabView tabView = new TabView(getContext(), title);
+            final TabView tabView = new TabView(getContext(), title);
             //添加到LinearLayout中
             linearLayout.addView(tabView);
+            final int finalI = i;
+
+                tabView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (currentTextView !=null){
+                            currentTextView.setTextColor(getContext().getResources().getColor(R.color.coffee2));
+                        }
+                        if (pagerChangeListener != null) {
+                            pagerChangeListener.onPagerChange(finalI);
+                        }
+                        currentTextView=tabView;
+                        currentTextView.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
+                    }
+                });
+
         }
+    }
+
+    public void setPagetListener(HomeFragment.OnPagerChangeListener pagerListener){
+        this.pagerChangeListener = pagerListener;
     }
 
     class TabView extends TextView {
@@ -92,5 +117,6 @@ public class TabIndicator extends HorizontalScrollView {
 
         }
     }
+
 }
 

@@ -117,8 +117,16 @@ public class HomeFragment extends CenterFragment {
 
         viewPager.setAdapter(viewPagerAdapter);
         viewPagerAdapter.setPagesList(pageData);
+        indicator.setPagetListener(myListener);
         indicator.setViewPager(viewPager);
     }
+
+    private OnPagerChangeListener myListener = new OnPagerChangeListener() {
+        @Override
+        public void onPagerChange(int pager) {
+            viewPager.setCurrentItem(pager);
+        }
+    };
 
     @Override
     public View getLeftView() {

@@ -42,6 +42,8 @@ public class AuditFragment extends CenterFragment {
         mViewPager = (AuditViewPager) mView.findViewById(R.id.fragment_audit_viewpager);
         mImageList = new ArrayList<>();
         mRollVPAdapter = new RollVPAdapter(mImageList, getContext());
+
+
         return mView;
     }
 
@@ -62,6 +64,7 @@ public class AuditFragment extends CenterFragment {
 
     @Override
     public View getLeftView() {
+
         return leftImage;
     }
 

@@ -2,6 +2,7 @@ package com.one.duanone.fragment;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,46 +28,66 @@ public class TitleFragment extends BaseFragment {
     private int count = 0;
     private static final String TAG = TitleFragment.class.getSimpleName();
     private View view;
+    private ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.title_view, null);
-        return view;
-    }
-
-    @Override
-    public void initFragmentData() {
         leftLinear = (LinearLayout) view.findViewById(R.id.title_left_relative);
         centerRelative = (RelativeLayout) view.findViewById(R.id.title_center_relative);
         rightRelative = (RelativeLayout) view.findViewById(R.id.title_right_relative);
+        return view;
     }
+
 
     /**
      * 设置View
      *
      * @param view
      */
-    public void setLeftView(View view) {
-        if (leftLinear != null && view != null) {
-            leftLinear.removeAllViews();
-            leftLinear.addView(view);
+
+
+    private OnChangeTitleView listener=new OnChangeTitleView() {
+        public void setLeftView(View view) {
+            if (leftLinear != null && view != null) {
+
+                leftLinear.removeAllViews();
+
+                leftLinear.addView(view,lp);
+            }
+            boolean viws = view==null;
+            boolean is = leftLinear == null;
+            LogUtils.i(TAG, "setLeftView: " + is + ": count: " + count++ +": View: " + viws);
         }
-        boolean is = leftLinear == null;
-        LogUtils.i(TAG, "setLeftView: " + is + ": count: " + count++);
+
+        public void setRightView(View view) {
+            if (rightRelative!=null && view!=null){
+
+                rightRelative.removeAllViews();
+
+                rightRelative.addView(view,lp);
+            }
+
+        }
+
+        public void setCenterView(View view) {
+            if (centerRelative != null && view !=null ){
+
+                centerRelative.removeAllViews();
+
+                centerRelative.addView(view,lp);
+            }
+        }
+    };
+
+    public OnChangeTitleView getListener() {
+        return listener;
     }
 
-    public void setRightView(View view) {
-        if (rightRelative!=null && view!=null){
-            rightRelative.removeAllViews();
-            rightRelative.addView(view);
-        }
-
+    public interface OnChangeTitleView{
+        void setLeftView(View view);
+         void setRightView(View view);
+         void setCenterView(View view);
     }
 
-    public void setCenterView(View view) {
-        if (centerRelative != null && view !=null ){
-            centerRelative.removeAllViews();
-            centerRelative.addView(view);
-        }
-    }
 }

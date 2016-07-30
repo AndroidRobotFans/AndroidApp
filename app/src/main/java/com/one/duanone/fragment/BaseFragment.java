@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public abstract class BaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mActivity = getActivity();
         context = getContext();
+
     }
 
 
@@ -30,18 +32,11 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = getFragmentView(inflater, container, savedInstanceState);
-
         return view;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initFragmentData();
-    }
 
     public abstract View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
-    public abstract void initFragmentData();
 
 }

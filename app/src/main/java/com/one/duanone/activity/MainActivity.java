@@ -46,21 +46,26 @@ public class MainActivity extends BaseActivity {
         public void onChangPager(int pager) {
             Log.i(TAG, "onChangPager: " + pager);
             //从数组中那到当前点击所对应的Fragment
-            CenterFragment fragment = (CenterFragment) fragmentArray[pager];
-            if (!isHave(fragment)) {
+            CenterFragment fragment = fragmentArray[pager];
+                Log.i(TAG, "onChangPager: 添加" + pager);
                 addFragment(contentFragmentId, fragment);
-            }
             //设置Title的三个View
-            titleFragment.setLeftView(fragment.getLeftView());
-            titleFragment.setRightView(fragment.getRightView());
-            titleFragment.setCenterView(fragment.getCenterView());
-
+            fragment.setListener(titleFragment.getListener());
             showFragment(fragment, true);
+            Log.i(TAG, "onChangPager: pager完了" + pager);
         }
     };
 
     //初始化
     private void initFragment() {
+
+
+        //初始化Fragment数组, 一定要和下面Tab的顺序一致
+        fragmentArray[0] = new HomeFragment();
+        fragmentArray[1] = new FindFragment();
+        fragmentArray[2] = new AuditFragment();
+        fragmentArray[3] = new MessageFragment();
+
         tabFragment = new TabBottomFragment();
         titleFragment = new TitleFragment();
 
@@ -75,13 +80,9 @@ public class MainActivity extends BaseActivity {
         showFragment(tabFragment, false);
 
         addFragment(titleFragmentId, titleFragment);
+
         showFragment(titleFragment, false);
 
-        //初始化Fragment数组, 一定要和下面Tab的顺序一致
-        fragmentArray[0] = new HomeFragment();
-        fragmentArray[1] = new FindFragment();
-        fragmentArray[2] = new AuditFragment();
-        fragmentArray[3] = new MessageFragment();
 
         for (int i = 0; i < fragmentArray.length; i++) {
             fragmentArray[i].setChangFragment(changeFrage);
@@ -89,6 +90,8 @@ public class MainActivity extends BaseActivity {
 
         //设置Tab的点击监听事件
         tabFragment.setListener(tabListener);
+
+//       tabFragment.setPager(0);
     }
 
 }

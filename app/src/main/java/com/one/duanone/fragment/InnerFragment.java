@@ -20,8 +20,5 @@ public class InnerFragment extends BaseFragment {
         return view;
     }
 
-    @Override
-    public void initFragmentData() {
 
-    }
 }

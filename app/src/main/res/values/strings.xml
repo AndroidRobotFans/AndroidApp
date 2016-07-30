@@ -14,4 +14,7 @@
     <string name="fans">粉丝关注</string>
     <string name="date">约起来吧</string>
     <string name="pillow">去TA的主页就可以发悄悄话哦！</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

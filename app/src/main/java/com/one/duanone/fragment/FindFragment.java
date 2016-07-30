@@ -67,6 +67,8 @@ public class FindFragment extends CenterFragment {
         //实例化轮播图右下角小圆点的控件
         mLayoutDoc = (LinearLayout) mViewVP.findViewById(R.id.top_roll_layout_dot);
         mImageDocList = new ArrayList<>();
+
+
         return mView;
     }
 
@@ -162,6 +164,7 @@ public class FindFragment extends CenterFragment {
 
     @Override
     public View getLeftView() {
+
         return leftImage;
     }
 
