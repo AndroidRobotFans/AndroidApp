@@ -8,6 +8,7 @@ public class News {
 
     /**
      * 消息类型. 有message的是普通类型, 没有的是直播
+     * 若是: success 则表明这条数据没有问题
      */
     private String message;
     /**
@@ -22,7 +23,18 @@ public class News {
      * 直播对象
      */
     private LiveNew liveNew;
+    /**
+     * 是否是直播 ,true为直播
+     */
+    private boolean isLive = false;
 
+    public boolean isLive() {
+        return isLive;
+    }
+
+    public void setIsLive(boolean live) {
+        isLive = live;
+    }
 
     public LiveNew getLiveNew() {
         return liveNew;
@@ -278,7 +290,7 @@ public class News {
         /**
          * 视频时长 单位是: 秒"
          */
-        private float duration;
+        private int duration;
 
         public int getPlay_count() {
             return play_count;
@@ -308,7 +320,7 @@ public class News {
             return duration;
         }
 
-        public void setDuration(float duration) {
+        public void setDuration(int duration) {
             this.duration = duration;
         }
     }
@@ -380,7 +392,36 @@ public class News {
         /**
          * 在线人数
          */
-        private int fan_ticket;
+        private int user_count;
+        private int id;
+        /**
+         * 星座
+         */
+        private  String constellation;
+
+        public String getConstellation() {
+            return constellation;
+        }
+
+        public void setConstellation(String constellation) {
+            this.constellation = constellation;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getUser_count() {
+            return user_count;
+        }
+
+        public void setUser_count(int user_count) {
+            this.user_count = user_count;
+        }
 
         /**
          * 主播星座
@@ -426,14 +467,6 @@ public class News {
 
         public void setFan_ticket_count(int fan_ticket_count) {
             this.fan_ticket_count = fan_ticket_count;
-        }
-
-        public int getFan_ticket() {
-            return fan_ticket;
-        }
-
-        public void setFan_ticket(int fan_ticket) {
-            this.fan_ticket = fan_ticket;
         }
 
         public String getBirthday_description() {
