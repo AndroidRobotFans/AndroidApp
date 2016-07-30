@@ -91,6 +91,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         manger.beginTransaction().hide(fragment).commit();
     }
 
+    public void showCenterAndHidt(Fragment show,Fragment hidden,int fragmentId){
+        hidden(hidden);
+        addFragment(fragmentId,show);
+        showFragment(show,true);
+    }
+
     /**
      * 判断fragment是否添加过
      *
