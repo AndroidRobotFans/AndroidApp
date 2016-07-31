@@ -124,6 +124,7 @@ public class HomeFragment extends CenterFragment {
         viewPagerAdapter.setPagesList(pageData);
 //        indicator.setPagetListener(myListener);
         indicator.setViewPager(viewPager);
+        viewPager.setCurrentItem(0);
     }
 
     private OnPagerChangeListener myListener = new OnPagerChangeListener() {

@@ -397,7 +397,7 @@ public class News {
         /**
          * 星座
          */
-        private  String constellation;
+        private String constellation;
 
         public String getConstellation() {
             return constellation;
@@ -425,7 +425,6 @@ public class News {
 
         /**
          * 主播星座
-
          */
         private String birthday_description;
         /**
@@ -518,7 +517,7 @@ public class News {
 
     @Override
     public String toString() {
-        if (group == null) {
+        if (getGroup() == null) {
             return "null";
         }
         String content = "用户：" + group.getUser().getName() + "：消息类型：" + group.getMedia_type() + ": 内容：" + group.getContent();
@@ -527,7 +526,9 @@ public class News {
                 return content + ": 视频地址: " + getGroup().getOriginVideo().getOrigin_video_url();
             }
             if (getGroup().getMedia_type() == 1 || getGroup().getMedia_type() == 2 || getGroup().getMedia_type() == 4) {
-                return content + ": 图片地址: " + getGroup().getImageNew().getImgUrl();
+                ImageNew imageNew = getGroup().getImageNew();
+                if (imageNew != null)
+                    return content + ": 图片地址: " + getGroup().getImageNew().getImgUrl();
             }
         }
         return content;

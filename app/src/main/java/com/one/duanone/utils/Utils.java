@@ -29,7 +29,7 @@ public class Utils {
                 sb.append(buffer, 0, len);
             }
             String json = new String(sb);
-            Log.i("TAG", "openAssetsFile: "+ json);
+            Log.i("TAG", "openAssetsFile: " + json);
             inputStream.close();
             reader.close();
             return json;
@@ -45,17 +45,25 @@ public class Utils {
         return null;
     }
 
-    public static Cursor getFileDb(String fileName){
+    public static Cursor getFileDb(String fileName) {
 
         File sd = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
 
-        File dbFile = new File(sd,fileName);
-
-
+        File dbFile = new File(sd, fileName);
 
         return null;
     }
 
-
-
+    /**
+     * 格式化为 2.2万这种
+     *
+     * @param count
+     * @return
+     */
+    public static String formatCount(int count) {
+        if (count >= 10000) {
+            return count / 10000 + "." + count % 10 + "万";
+        }
+        return count + "";
+    }
 }

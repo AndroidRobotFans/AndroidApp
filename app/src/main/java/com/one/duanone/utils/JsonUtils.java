@@ -66,7 +66,7 @@ public class JsonUtils {
             //有这个属性的json是直播类型的
             if (JSON.has("status_code")) {
                 list = formatLive(JSON);
-                Log.i(TAG, "getJsonNews:视频类型 ");
+                Log.i(TAG, "getJsonNews:视频类型 status_code");
                 return list;
             }
 
@@ -82,7 +82,11 @@ public class JsonUtils {
                 String tip = jsonData.optString("tip");
                 news.setTip(tip);
                 JSONObject obj = dataArray.getJSONObject(i);
-
+                //不包含group的直接返回
+                if (!obj.has("group")) {
+                    Log.i(TAG, "getJsonNews: 没有Group");
+                    continue;
+                }
                 JSONObject groupObj = obj.getJSONObject("group");
 
                 News.Group group = new News.Group();
@@ -119,6 +123,8 @@ public class JsonUtils {
 
                 int media_type = groupObj.optInt("media_type");
                 group.setMedia_type(media_type);
+                String content = groupObj.optString("content");
+                group.setContent(content);
 
                 JSONObject userObj = groupObj.getJSONObject("user");
                 News.User user = getUser(userObj);
@@ -131,7 +137,6 @@ public class JsonUtils {
                 if (media_type == 1 || media_type == 2 || media_type == 4) {
                     News.ImageNew imageNew = formatImage(groupObj);
                     if (imageNew instanceof News.ImageNew) {
-
                         group.setImageNew(imageNew);
                         Log.i(TAG, "getJsonNews: 解析图片");
                     }
@@ -142,7 +147,6 @@ public class JsonUtils {
                     if (videoNew instanceof News.OriginVideo) {
                         group.setOriginVideo(videoNew);
                         Log.i(TAG, "getJsonNews: 解析视频");
-
                     }
                 }
                 news.setMessage("success");
@@ -256,7 +260,7 @@ public class JsonUtils {
         int play_count = jsonObj.optInt("play_count");
         int duration = (int) jsonObj.optDouble("duration");
         JSONObject medium_cover = jsonObj.optJSONObject("medium_cover");
-        String imageUrl = medium_cover.optJSONArray("url_list").optString(0);
+        String imageUrl = medium_cover.optJSONArray("url_list").optJSONObject(0).optString("url");
         JSONObject videoArray = jsonObj.optJSONObject("720p_video");
         String videoUrl = videoArray.optJSONArray("url_list").optString(0);
 

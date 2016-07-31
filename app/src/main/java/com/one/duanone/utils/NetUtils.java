@@ -11,6 +11,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
 /**
  * PC: Masterr_Robot.
  * Created by DKL on 2016/7/25  22:24.
@@ -27,7 +32,7 @@ public class NetUtils {
         //请求结果回调
         if (list != null) {
             callBack.succeed();
-        }else {
+        } else {
             callBack.error("解析失败");
         }
         return list;
@@ -70,6 +75,19 @@ public class NetUtils {
             error(callBack, e.getMessage());
         }
         return null;
+    }
+
+    /**
+     * 使用okHttp请求网络
+     *
+     * @param url
+     * @param callback
+     */
+    public static void getUrlStr(String url, Callback callback) {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url(url).build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(callback);
     }
 
     /**

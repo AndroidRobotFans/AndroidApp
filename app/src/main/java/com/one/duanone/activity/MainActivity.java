@@ -114,7 +114,6 @@ public class MainActivity extends BaseActivity {
 
         fragmentArray[3].setShowListener(messageListener);
 
-//       tabFragment.setPager(0);
     }
 
 }
