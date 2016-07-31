@@ -54,11 +54,11 @@ public class HomeFragment extends CenterFragment {
 
         centerRadioGroup = (RadioGroup) View.inflate(getContext(), R.layout.home_center_radiogroup, null);
         image = (ImageView) View.inflate(getContext(), R.layout.home_left_image, null);
-        rightImage= (ImageView) View.inflate(getContext(),R.layout.home_right_image,null);
+        rightImage = (ImageView) View.inflate(getContext(), R.layout.home_right_image, null);
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), PersonalActivity.class);
+                Intent intent = new Intent(getActivity(), PersonalActivity.class);
                 startActivity(intent);
             }
         });
@@ -88,10 +88,7 @@ public class HomeFragment extends CenterFragment {
         if (viewPager != null) {
             viewPager.addOnPageChangeListener(viewPagerListener);
         }
-        for (int i = 0; i < 10; i++) {
-            InnerFragment innerFragment = new InnerFragment();
-            listData.add(innerFragment);
-        }
+
         final NetUtils.NetCallBack callBack = new NetUtils.NetCallBack() {
             @Override
             public void succeed() {
@@ -113,11 +110,19 @@ public class HomeFragment extends CenterFragment {
      * 改变数据
      */
     private void changeData() {
+
+        for (int i = 0; i < pageData.size(); i++) {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", pageData.get(i).getPageUrl());
+            InnerFragment fragment = new InnerFragment();
+            fragment.setArguments(bundle);
+        }
+
         viewPagerAdapter = new FragPagerAdapter(getChildFragmentManager(), pageData);
 
         viewPager.setAdapter(viewPagerAdapter);
         viewPagerAdapter.setPagesList(pageData);
-        indicator.setPagetListener(myListener);
+//        indicator.setPagetListener(myListener);
         indicator.setViewPager(viewPager);
     }
 

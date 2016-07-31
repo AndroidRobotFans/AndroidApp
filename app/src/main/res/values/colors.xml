@@ -11,4 +11,6 @@
     <color name="coffee">#6B5547</color>
     <color name="coffee2">#4D4036</color>
     <color name="trans_gray">#33cccccc</color>
+    <color name="trans_bg">#6999</color>
+    <color name="orange_textColor">#FF6911</color>
 </resources>

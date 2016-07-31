@@ -13,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +38,7 @@ public class TabIndicator extends HorizontalScrollView {
     private LinearLayout linearLayout;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
-    private TextView currentTextView ;
+    private TextView currentTextView;
     //含有View的个数,根据ViewPage的Adapter;来确定,然后生成count个TextView来做指示器
     private int haveViewCount;
     private HomeFragment.OnPagerChangeListener pagerChangeListener;
@@ -65,6 +67,22 @@ public class TabIndicator extends HorizontalScrollView {
         pagerAdapter = viewPager.getAdapter();
         haveViewCount = viewPager.getAdapter().getCount();
         createTabView(haveViewCount);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                setState(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     /**
@@ -80,29 +98,46 @@ public class TabIndicator extends HorizontalScrollView {
             //添加到LinearLayout中
             linearLayout.addView(tabView);
             final int finalI = i;
-
-                tabView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (currentTextView !=null){
-                            currentTextView.setTextColor(getContext().getResources().getColor(R.color.coffee2));
-                        }
-                        if (pagerChangeListener != null) {
-                            pagerChangeListener.onPagerChange(finalI);
-                        }
-                        currentTextView=tabView;
-                        currentTextView.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
-                    }
-                });
+            tabView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setState(finalI);
+                }
+            });
 
         }
     }
 
-    public void setPagetListener(HomeFragment.OnPagerChangeListener pagerListener){
+    public void setPagetListener(HomeFragment.OnPagerChangeListener pagerListener) {
         this.pagerChangeListener = pagerListener;
     }
 
+    /**
+     * 改变tabView 的状态
+     *
+     * @param state
+     */
+    public void setState(int state) {
+        if (haveViewCount <= state){
+            return;
+        }
+        TabView tabView = (TabView) linearLayout.getChildAt(state);
+        if (currentTextView != null) {
+            currentTextView.setTextColor(getContext().getResources().getColor(R.color.coffee2));
+        }
+        if (pagerChangeListener != null) {
+            pagerChangeListener.onPagerChange(state);
+        }
+        currentTextView = tabView;
+        currentTextView.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
+        if (viewPager != null && viewPager.getCurrentItem() != state) {
+            //切换viewPager
+            viewPager.setCurrentItem(state);
+        }
+    }
+
     class TabView extends TextView {
+
         public TabView(Context context, String title) {
             super(context);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0,
@@ -117,6 +152,5 @@ public class TabIndicator extends HorizontalScrollView {
 
         }
     }
-
 }
 

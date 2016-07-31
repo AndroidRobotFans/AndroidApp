@@ -1,7 +1,5 @@
 package com.one.duanone.fragment;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,17 +33,18 @@ public abstract class CenterFragment extends BaseFragment {
         initFragmentData();
         return view;
     }
-//  每次点击bottom按钮回调这个方法
+
+    //  每次点击bottom按钮回调这个方法
     public void setListener(TitleFragment.OnChangeTitleView listener) {
         this.changListener = listener;
         //第一次不调用
         //后面每次点击都会调用
-        if (isSecond){
+        if (isSecond) {
             changeState();
         }
     }
 
-//    创建完成后 自动回调设置title的三个view
+    //    创建完成后 自动回调设置title的三个view
 //    onActivityCreated在生命周期里只会执行一次（创建之后不再执行）
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

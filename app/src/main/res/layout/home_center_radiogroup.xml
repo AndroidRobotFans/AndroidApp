@@ -9,11 +9,14 @@
     android:padding="@dimen/padding_5dp">
 
     <RadioButton
+        android:id="@+id/sift_home_radio_btn"
         style="@style/TopRadioButtonStyle"
+        android:checked="true"
         android:background="@drawable/selector_top_middle_radiogroup_left"
         android:text="@string/essence"/>
 
     <RadioButton
+        android:id="@+id/attention_home_radio_btn"
         style="@style/TopRadioButtonStyle"
         android:background="@drawable/selector_top_middle_radiogroup_right"
         android:text="@string/attention"/>
