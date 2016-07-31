@@ -40,10 +40,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
     @Override
     public MyRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(context).inflate(R.layout.recycler_item, null);
         ViewHolder viewHolder = new ViewHolder(view);
-
         return viewHolder;
     }
 
@@ -52,13 +50,14 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         //获取itemType的值, 判断其消息类型
         int itemType = getItemViewType(position);
         News.User user = null;
-        News.Group group = list.get(position).getGroup();
-        News.LiveNew liveNew = list.get(position).getLiveNew();
+        News.Group group = null;
+        News.LiveNew liveNew = null;
 
         //是否是直播
         boolean isLiveing = list.get(position).isLive();
         String name = null;
         String iconUrl = null;
+
 
         String content;
         String imageUrl = null;
@@ -72,15 +71,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
         //不是直播
         if (!isLiveing) {
-
+            group = list.get(position).getGroup();
             content = group.getContent();
-            user = group.getUser();
             //设置用户信息
-
-            holder.name.setText(name);
-            GlideUtils.urlCircleImage(context, iconUrl, holder.image);
-            name = user.getName();
-            iconUrl = user.getAvatar_url();
+            setUserContent(holder, group.getUser());
             diggCount = group.getDigg_count();
             buryCount = group.getBury_count();
             commentCount = group.getComment_count();
@@ -97,7 +91,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                 holder.vdieo_layout_bg.setVisibility(View.VISIBLE);
                 holder.imagePlay.setVisibility(View.VISIBLE);
                 setTextCount(playCount, holder.vdieo_play_count);
-                setTextCount(duration, holder.vdieo_duration);
+                setTextDuration(duration, holder.vdieo_duration);
             } else {
                 holder.vdieo_layout_bg.setVisibility(View.GONE);
                 holder.imagePlay.setVisibility(View.GONE);
@@ -113,6 +107,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             setTextCount(diggCount, holder.digg_count);
             setTextCount(shareCount, holder.share_count);
             setTextCount(commentCount, holder.comment_count);
+        } else {
+            liveNew = list.get(position).getLiveNew();
+            setUserContent(holder, liveNew.getUser());
+            setImage(holder.image,liveNew.getImgUrl());
         }
     }
 
@@ -140,6 +138,14 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         GlideUtils.urlCircleImage(context, url, iv);
     }
 
+    /**
+     * @param time
+     * @param tv
+     */
+    private void setTextDuration(int time, TextView tv) {
+        String str = Utils.formatDurationS(time);
+        setTextView(str, tv);
+    }
 
     /**
      * 设置TextView的显示时间
@@ -177,6 +183,17 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     private void setTextViewColor(String str, TextView tv) {
         tv.setTextColor(Color.rgb(223, 111, 95));
         setTextView(str, tv);
+    }
+
+    /**
+     * 设置用户信息
+     *
+     * @param holder
+     * @param user
+     */
+    private void setUserContent(ViewHolder holder, News.User user) {
+        holder.name.setText(user.getName());
+        setUserIcon(user.getAvatar_url(), holder.icon);
     }
 
     @Override

@@ -60,7 +60,6 @@ public class JsonUtils {
 
         try {
             List<News> list = new ArrayList<>();
-
             JSONObject JSON = new JSONObject(json);
 
             //有这个属性的json是直播类型的
@@ -260,10 +259,24 @@ public class JsonUtils {
         int play_count = jsonObj.optInt("play_count");
         int duration = (int) jsonObj.optDouble("duration");
         JSONObject medium_cover = jsonObj.optJSONObject("medium_cover");
-        String imageUrl = medium_cover.optJSONArray("url_list").optJSONObject(0).optString("url");
-        JSONObject videoArray = jsonObj.optJSONObject("720p_video");
-        String videoUrl = videoArray.optJSONArray("url_list").optString(0);
+        JSONArray imgArray = medium_cover.optJSONArray("url_list");
+        String imageUrl = null;
+        //是否循环完数组,确认每个对象中没有图片地址后,在结束
+        for (int i = 0; i < imgArray.length(); i++) {
+            if (imageUrl != null) continue;
+            imageUrl = imgArray.optJSONObject(i).optString("url");
 
+        }
+
+        JSONObject videoArray = jsonObj.optJSONObject("720p_video");
+
+        JSONArray vArray = videoArray.optJSONArray("url_list");
+        String videoUrl = null;
+
+        for (int j = 0; j < vArray.length(); j++) {
+            if (videoUrl != null) continue;
+            videoUrl = vArray.optJSONObject(j).optString("url");
+        }
         originVideo.setDuration(duration);
         originVideo.setPlay_count(play_count);
         originVideo.setMedium_cover_url(imageUrl);

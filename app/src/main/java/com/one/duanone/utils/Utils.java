@@ -66,4 +66,19 @@ public class Utils {
         }
         return count + "";
     }
+
+    /**
+     * 格式化, 一秒为时间的,
+     *
+     * @param time
+     * @return 00:00这种形式
+     */
+    public static String formatDurationS(int time) {
+        int m = time / 60;
+        int s = time % 60;
+        String mm = m > 9 ? m + "" : "0" + m;
+        mm = m == 0 ? 00 + "" : mm;
+        String ss = s > 9 ? s + "" : "0" + s;
+        return mm + ":" + ss;
+    }
 }

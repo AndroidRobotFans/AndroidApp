@@ -62,7 +62,9 @@ public class InnerFragment extends BaseFragment {
         listData = new ArrayList<>();
         recyclerAdapter = new MyRecyclerAdapter(listData, getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         NetUtils.getUrlStr(url, callback);
+
         recyclerView.setAdapter(recyclerAdapter);
         return view;
     }
