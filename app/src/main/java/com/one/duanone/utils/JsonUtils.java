@@ -60,12 +60,13 @@ public class JsonUtils {
 
         try {
             List<News> list = new ArrayList<>();
+            Log.i(TAG, "getJsonNews:========== "+json);
             JSONObject JSON = new JSONObject(json);
-
             //有这个属性的json是直播类型的
             if (JSON.has("status_code")) {
                 list = formatLive(JSON);
                 Log.i(TAG, "getJsonNews:视频类型 status_code");
+
                 return list;
             }
 
@@ -178,7 +179,9 @@ public class JsonUtils {
 
             JSONObject owner = data.optJSONObject("owner");
 
-            JSONArray url_list = owner.optJSONArray("url_list");
+            JSONObject avatar_large = owner.optJSONObject("avatar_large");
+
+            JSONArray url_list = avatar_large.optJSONArray("url_list");
 
             JSONObject avatar_thumb = owner.optJSONObject("avatar_thumb");
             JSONArray url_list1 = avatar_thumb.optJSONArray("url_list");
@@ -194,7 +197,7 @@ public class JsonUtils {
 
             liveNew.setUser(user);
 
-            JSONObject stream_url = owner.optJSONObject("stream_url");
+            JSONObject stream_url = data.optJSONObject("stream_url");
 
             int id = stream_url.optInt("id");
             String rtmp_pull_url = stream_url.optString("rtmp_pull_url");

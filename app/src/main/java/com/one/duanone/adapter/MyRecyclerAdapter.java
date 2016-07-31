@@ -40,7 +40,12 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
     @Override
     public MyRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.recycler_item, null);
+        View view = null;
+        if (viewType != 22) {
+            view = LayoutInflater.from(context).inflate(R.layout.recycler_item, null);
+        } else {
+            view = LayoutInflater.from(context).inflate(R.layout.live_tiem_recycle, null);
+        }
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -50,8 +55,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         //获取itemType的值, 判断其消息类型
         int itemType = getItemViewType(position);
         News.User user = null;
-        News.Group group = null;
-        News.LiveNew liveNew = null;
+
 
         //是否是直播
         boolean isLiveing = list.get(position).isLive();
@@ -59,18 +63,20 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         String iconUrl = null;
 
 
-        String content;
-        String imageUrl = null;
-        int diggCount = -1;
-        int buryCount = -1;
-        int commentCount = -1;
-        int shareCount = -1;
-
-        int playCount = -1;
-        int duration = -1;
-
         //不是直播
         if (!isLiveing) {
+
+            News.Group group = null;
+            String content;
+            String imageUrl = null;
+            int diggCount = -1;
+            int buryCount = -1;
+            int commentCount = -1;
+            int shareCount = -1;
+
+            int playCount = -1;
+            int duration = -1;
+
             group = list.get(position).getGroup();
             content = group.getContent();
             //设置用户信息
@@ -108,9 +114,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             setTextCount(shareCount, holder.share_count);
             setTextCount(commentCount, holder.comment_count);
         } else {
+            News.LiveNew liveNew = null;
             liveNew = list.get(position).getLiveNew();
-            setUserContent(holder, liveNew.getUser());
-            setImage(holder.image,liveNew.getImgUrl());
+            setUserContent(holder, liveNew.getUser());//设置用户信息
+            setImage(holder.image, liveNew.getImgUrl());//设置图片
+            setTextCount(liveNew.getUser_count(), holder.userCount); //观看人数
         }
     }
 
@@ -175,17 +183,6 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     }
 
     /**
-     * 设置文字颜色和文字,颜色为 暗红色
-     *
-     * @param str
-     * @param tv
-     */
-    private void setTextViewColor(String str, TextView tv) {
-        tv.setTextColor(Color.rgb(223, 111, 95));
-        setTextView(str, tv);
-    }
-
-    /**
      * 设置用户信息
      *
      * @param holder
@@ -208,10 +205,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
          * 0-4都是json里面自带的,
          * 22: 当是22时,说明没有Group, 有Live, 是直播的类型的
          */
-        News.Group group = list.get(position).getGroup();
-        if (group != null) {
-
-            return group.getMedia_type();
+        if (!list.get(position).isLive()) {
+            return list.get(position).getGroup().getMedia_type();
         }
         return 22;
     }
@@ -235,6 +230,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         TextView vdieo_duration;//视频长度
         TextView vdieo_play_count;//视频播放次数
         RelativeLayout vdieo_layout_bg;//视频显示详情的布局, 默认是gone的
+        TextView userCount;
 
         View item;
 
@@ -254,7 +250,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             vdieo_duration = $(R.id.video_duration_item_recycler);
             vdieo_layout_bg = $(R.id.bottom_rl_item_recycler);
             vdieo_play_count = $(R.id.play_item_count_recycler);
-
+            userCount = $(R.id.user_count_item_recycler);
         }
 
         /**
@@ -267,6 +263,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         private <T extends View> T $(int resID) {
             return (T) item.findViewById(resID);
         }
+
     }
 
     /**
@@ -278,4 +275,5 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         this.list = list;
         notifyDataSetChanged();
     }
+
 }
