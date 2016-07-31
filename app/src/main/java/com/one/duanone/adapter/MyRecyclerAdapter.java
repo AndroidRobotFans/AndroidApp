@@ -103,6 +103,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                 holder.imagePlay.setVisibility(View.GONE);
             }
 
+
             setTextView(content, holder.content);
             setTextView(name, holder.name);
             setUserIcon(iconUrl, holder.icon);
