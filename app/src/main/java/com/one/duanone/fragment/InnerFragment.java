@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 import com.one.duanone.R;
 import com.one.duanone.adapter.MyRecyclerAdapter;
 import com.one.duanone.bean.News;
 import com.one.duanone.utils.JsonUtils;
 import com.one.duanone.utils.NetUtils;
+import com.one.duanone.utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,11 +35,15 @@ public class InnerFragment extends BaseFragment {
     private String url;
     private MyRecyclerAdapter recyclerAdapter;
     private List<News> listData;
+    private WebView webView;
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycel_view, null);
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_inner);
+        webView = (WebView) view.findViewById(R.id.web_view_inner);
+
         url = getArguments().getString("url");
         Callback callback = new Callback() {
             @Override
@@ -50,7 +56,12 @@ public class InnerFragment extends BaseFragment {
             public void onResponse(Call call, Response response) throws IOException {
                 String json = response.body().string();
                 Log.i(TAG, "onResponse: JSON请求成功");
+                //写到文件中
+//                Utils.outputFileString(json);
                 listData = JsonUtils.getJsonNews(json);
+                if (listData.size()==0){
+
+                }
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

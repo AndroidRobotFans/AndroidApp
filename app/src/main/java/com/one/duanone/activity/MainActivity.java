@@ -81,8 +81,6 @@ public class MainActivity extends BaseActivity {
 
     //初始化
     private void initFragment() {
-
-
         //初始化Fragment数组, 一定要和下面Tab的顺序一致
         fragmentArray[0] = new HomeFragment();
         fragmentArray[1] = new FindFragment();
