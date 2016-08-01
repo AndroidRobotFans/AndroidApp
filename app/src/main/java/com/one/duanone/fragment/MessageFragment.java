@@ -30,8 +30,6 @@ public class MessageFragment extends CenterFragment {
     private ImageView leftImage;
     private TextView rightText;
     private TextView centerText;
-    private FragmentManager messageFragment;
-    private android.support.v4.app.FragmentTransaction ft;
 
 
     @Override
@@ -43,11 +41,11 @@ public class MessageFragment extends CenterFragment {
         return view;
     }
 
+
     @Override
     public void initFragmentData() {
 
         leftImage = (ImageView) View.inflate(getContext(), R.layout.message_left_image, null);
-        leftImage = (ImageView) View.inflate(getActivity(), R.layout.message_left_image, null);
         leftImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,9 +57,7 @@ public class MessageFragment extends CenterFragment {
         boolean image = leftImage ==null;
         Log.i(TAG, "setLeftView: 初始化View: image : "+ image);
         centerText= (TextView) View.inflate(getContext(),R.layout.message_center_text,null);
-        centerText= (TextView) View.inflate(getActivity(),R.layout.message_center_text,null);
         rightText= (TextView) View.inflate(getContext(),R.layout.message_right_text,null);
-        rightText= (TextView) View.inflate(getActivity(),R.layout.message_right_text,null);
         rightText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,9 +74,6 @@ public class MessageFragment extends CenterFragment {
     @Override
     public View getLeftView() {
         Log.i(TAG, "setLeftView: LeftView");
-        if (leftImage == null){
-            initFragmentData();
-        }
         return leftImage;
     }
 

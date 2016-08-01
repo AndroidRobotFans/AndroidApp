@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.one.duanone.activity.MainActivity;
+
 /**
  * Created by jj on 2016/7/26.
  */
@@ -31,8 +33,29 @@ public abstract class CenterFragment extends BaseFragment {
         Log.i("TAG", "onCreateView: shishsihsihsishi");
         View view = getFragmentView(inflater, container, savedInstanceState);
         initFragmentData();
+
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        changeTitle();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden){
+            changeTitle();
+        }
+    }
+
+    private void changeTitle() {
+        MainActivity activity = (MainActivity) getActivity();
+        setListener(activity.getChangeTitleListener());
+    }
+
 
     //  每次点击bottom按钮回调这个方法
     public void setListener(TitleFragment.OnChangeTitleView listener) {
@@ -54,7 +77,7 @@ public abstract class CenterFragment extends BaseFragment {
         isSecond = true;
     }
 
-    private void changeState() {
+    public void changeState() {
         if (changListener != null) {
             changListener.setRightView(getRightView());
             changListener.setCenterView(getCenterView());

@@ -34,17 +34,17 @@ public class MainActivity extends BaseActivity {
         }
     };
     private BlackListFragment blackListFragment;
-    private MessageFragment.ShowCenterFragment messageListener=new MessageFragment.ShowCenterFragment() {
+    private MessageFragment.ShowCenterFragment messageListener = new MessageFragment.ShowCenterFragment() {
         @Override
         public void showFragment() {
-            showCenterAndHidt(blackListFragment,tabFragment,contentFragmentId);
+            showCenterAndHidt(blackListFragment, tabFragment, contentFragmentId);
         }
     };
     private BlackListFragment.OnBackListener blackListener = new BlackListFragment.OnBackListener() {
         @Override
         public void onBack() {
-            showFragment(fragmentArray[3],true);
-            showFragment(tabFragment,false);
+            showFragment(fragmentArray[3], true);
+            showFragment(tabFragment, false);
         }
     };
 
@@ -62,14 +62,22 @@ public class MainActivity extends BaseActivity {
             Log.i(TAG, "onChangPager: " + pager);
             //从数组中那到当前点击所对应的Fragment
             CenterFragment fragment = fragmentArray[pager];
-                Log.i(TAG, "onChangPager: 添加" + pager);
-                addFragment(contentFragmentId, fragment);
-            //设置Title的三个View
-            fragment.setListener(titleFragment.getListener());
+            Log.i(TAG, "onChangPager: 添加" + pager);
+            addFragment(contentFragmentId, fragment);
+
             showFragment(fragment, true);
             Log.i(TAG, "onChangPager: pager完了" + pager);
         }
     };
+
+    /**
+     * 提供titleFragment监听事件,在centerFragment的生命周期中调用
+     * 每次fragment显示隐藏,就会执行listener.setleftView等方法
+     * @return
+     */
+    public TitleFragment.OnChangeTitleView getChangeTitleListener() {
+        return titleFragment.getListener();
+    }
 
     //初始化
     private void initFragment() {
@@ -106,7 +114,6 @@ public class MainActivity extends BaseActivity {
         for (int i = 0; i < fragmentArray.length; i++) {
             fragmentArray[i].setChangFragment(changeFrage);
         }
-
 
 
         //设置Tab的点击监听事件
