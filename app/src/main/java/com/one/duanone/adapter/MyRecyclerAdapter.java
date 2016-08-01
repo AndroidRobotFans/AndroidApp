@@ -1,7 +1,6 @@
 package com.one.duanone.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.util.Util;
 import com.one.duanone.R;
 import com.one.duanone.bean.News;
 import com.one.duanone.utils.GlideUtils;
@@ -120,6 +117,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             setUserContent(holder, liveNew.getUser());//设置用户信息
             setImage(holder.image, liveNew.getImgUrl());//设置图片
             setTextCount(liveNew.getUser_count(), holder.userCount); //观看人数
+            String city = liveNew.getCity();
+            city = TextUtils.isEmpty(city) ? "未知星球" : city;
+            setTextView(city, holder.city);
         }
     }
 
@@ -232,6 +232,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         TextView vdieo_play_count;//视频播放次数
         RelativeLayout vdieo_layout_bg;//视频显示详情的布局, 默认是gone的
         TextView userCount;
+        TextView city;
 
         View item;
 
@@ -252,6 +253,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             vdieo_layout_bg = $(R.id.bottom_rl_item_recycler);
             vdieo_play_count = $(R.id.play_item_count_recycler);
             userCount = $(R.id.user_count_item_recycler);
+            city = $(R.id.city_item_recycle);
         }
 
         /**
