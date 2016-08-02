@@ -14,9 +14,10 @@ import com.one.duanone.activity.MainActivity;
  * Created by jj on 2016/7/26.
  */
 public abstract class CenterFragment extends BaseFragment {
-    public MessageFragment.ShowCenterFragment listener;
+    public ShowCenterFragment listener;
     private TitleFragment.OnChangeTitleView changListener;
     private boolean isSecond = false;
+    private PersonalFragment personalFragment;
 
     //shit
     public abstract View getLeftView();
@@ -36,6 +37,7 @@ public abstract class CenterFragment extends BaseFragment {
 
         return view;
     }
+
 
     @Override
     public void onResume() {
@@ -95,7 +97,15 @@ public abstract class CenterFragment extends BaseFragment {
         this.changeFrage = changeFrage;
     }
 
-    public void setShowListener(MessageFragment.ShowCenterFragment listener) {
+    public void setShowListener(ShowCenterFragment listener) {
         this.listener = listener;
+    }
+    public void showUserFragment(){
+        if (personalFragment == null)
+            personalFragment = new PersonalFragment();
+        listener.showFragment(personalFragment);
+    }
+    public interface ShowCenterFragment {
+        void showFragment(NotableFragment fragment);
     }
 }

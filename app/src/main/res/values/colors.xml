@@ -5,9 +5,12 @@
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000</color>
     <color name="gray">#8a8888</color>
+    <color name="gray_1">#ebe5e5</color>
+    <color name="personal">#6E645C</color>
     <color name="gray_tab_bg">#FFDFE1E4</color>
     <color name="title_background_yellow">#DCD9CF</color>
     <color name="white">#FFF</color>
+    <color name="golden">#FFE7AD0D</color>
     <color name="coffee">#6B5547</color>
     <color name="coffee2">#4D4036</color>
     <color name="trans_gray">#33cccccc</color>

@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 
 import com.one.duanone.R;
-import com.one.duanone.activity.PersonalActivity;
 import com.one.duanone.adapter.FragPagerAdapter;
 import com.one.duanone.bean.Pages;
 import com.one.duanone.utils.JsonUtils;
@@ -30,7 +29,6 @@ public class HomeFragment extends CenterFragment {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
     private ViewPager viewPager;
-    private OnPagerChangeListener listener;
     private View view;
     private List<BaseFragment> listData;
     private FragPagerAdapter viewPagerAdapter;
@@ -58,8 +56,10 @@ public class HomeFragment extends CenterFragment {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PersonalActivity.class);
-                startActivity(intent);
+                if (listener != null) {
+                    showUserFragment();
+                    Log.i(TAG, "onClick: 444444444444444");
+                }
             }
         });
 
@@ -149,6 +149,7 @@ public class HomeFragment extends CenterFragment {
         return centerRadioGroup;
     }
 
+
     /**
      * 接口回调
      */
@@ -167,8 +168,5 @@ public class HomeFragment extends CenterFragment {
         return (T) view.findViewById(resId);
     }
 
-    public void setListener(OnPagerChangeListener listener) {
-        this.listener = listener;
-    }
 
 }

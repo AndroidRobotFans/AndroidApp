@@ -10,4 +10,9 @@
         <attr name="imageBackground" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="DoubleTextView">
+        <attr name="text1" format="string"/>
+        <attr name="text2" format="string"/>
+    </declare-styleable>
+
 </resources>

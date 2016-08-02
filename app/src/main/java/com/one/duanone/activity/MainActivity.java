@@ -11,6 +11,7 @@ import com.one.duanone.fragment.CenterFragment;
 import com.one.duanone.fragment.FindFragment;
 import com.one.duanone.fragment.HomeFragment;
 import com.one.duanone.fragment.MessageFragment;
+import com.one.duanone.fragment.NotableFragment;
 import com.one.duanone.fragment.TabBottomFragment;
 import com.one.duanone.fragment.TitleFragment;
 
@@ -33,17 +34,18 @@ public class MainActivity extends BaseActivity {
             showFragment(fragment);
         }
     };
-    private BlackListFragment blackListFragment;
-    private MessageFragment.ShowCenterFragment messageListener = new MessageFragment.ShowCenterFragment() {
+
+    private CenterFragment.ShowCenterFragment messageListener = new CenterFragment.ShowCenterFragment() {
         @Override
-        public void showFragment() {
-            showCenterAndHidt(blackListFragment, tabFragment, contentFragmentId);
+        public void showFragment(NotableFragment fragment) {
+            fragment.setBackLisener(blackListener);
+            showCenterAndHidt(fragment, tabFragment, contentFragmentId);
         }
     };
     private BlackListFragment.OnBackListener blackListener = new BlackListFragment.OnBackListener() {
         @Override
         public void onBack() {
-            showFragment(fragmentArray[3], true);
+            showFragment(fragmentArray[tabFragment.getCurrentPager()], true);
             showFragment(tabFragment, false);
         }
     };
@@ -87,9 +89,6 @@ public class MainActivity extends BaseActivity {
         fragmentArray[2] = new AuditFragment();
         fragmentArray[3] = new MessageFragment();
 
-        blackListFragment = new BlackListFragment();
-
-        blackListFragment.setBackLisener(blackListener);
 
         tabFragment = new TabBottomFragment();
         titleFragment = new TitleFragment();
@@ -111,13 +110,14 @@ public class MainActivity extends BaseActivity {
 
         for (int i = 0; i < fragmentArray.length; i++) {
             fragmentArray[i].setChangFragment(changeFrage);
+            fragmentArray[i].setShowListener(messageListener);
         }
 
 
         //设置Tab的点击监听事件
         tabFragment.setListener(tabListener);
 
-        fragmentArray[3].setShowListener(messageListener);
+
 
     }
 

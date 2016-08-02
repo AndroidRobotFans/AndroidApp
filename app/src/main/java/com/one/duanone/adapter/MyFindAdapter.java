@@ -22,6 +22,7 @@ public class MyFindAdapter extends BaseAdapter {
     List<String> list;
     Context context;
 
+
     public MyFindAdapter(List<String> list, Context context) {
         this.list = list;
         this.context = context;

@@ -19,7 +19,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
     private FragmentManager manger;
-    private Fragment currentShowFragment = null;
+    public Fragment currentShowFragment = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

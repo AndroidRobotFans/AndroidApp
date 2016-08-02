@@ -102,6 +102,10 @@ public class TabBottomFragment extends BaseFragment implements View.OnClickListe
         void onChangPager(int pager);
     }
 
+    public int getCurrentPager() {
+        return currentPager;
+    }
+
     /**
      * findViewBy id
      *
