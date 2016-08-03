@@ -1,4 +1,4 @@
-package com.one.duanone.Manager;
+package com.one.duanone.manager;
 
 /**
  * Created by Masterr_Robot on 2016/7/22.

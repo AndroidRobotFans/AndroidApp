@@ -1,17 +1,24 @@
 package com.one.duanone.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.one.duanone.R;
+
+import java.io.InputStream;
 
 /**
  * PC: Masterr_Robot.
@@ -73,13 +80,16 @@ public class GlideUtils {
      */
     public static class GlideCircleTransform extends BitmapTransformation {
 
+        private Context context;
 
         public GlideCircleTransform(Context context) {
             super(context);
+            this.context = context;
         }
 
         @Override
         protected Bitmap transform(BitmapPool bitmapPool, Bitmap bitmap, int i, int i1) {
+
             return cicleCrop(bitmapPool, bitmap);
         }
 
@@ -105,9 +115,9 @@ public class GlideUtils {
 
         Bitmap squared = Bitmap.createBitmap(source, x, y, size, size);
 
-        Bitmap result = pool.get(size, size, Bitmap.Config.ARGB_8888);
+        Bitmap result = pool.get(size, size, Bitmap.Config.ARGB_4444);
         if (result == null) {
-            result = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+            result = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_4444);
         }
         //把bitmap当做画布
         Canvas canvas = new Canvas(result);
@@ -127,14 +137,17 @@ public class GlideUtils {
      * @parent
      */
     public static class GlideRoundTransform extends BitmapTransformation {
+        private Context context;
 
         public GlideRoundTransform(Context context) {
             super(context);
+            this.context = context;
         }
 
         @Override
         protected Bitmap transform(BitmapPool bitmapPool, Bitmap bitmap, int i, int i1) {
-            return roundCrop(bitmapPool, bitmap);
+            Bitmap b = zoomBitmap(roundCrop(bitmapPool, bitmap));
+            return addLogo(b, context);
         }
 
         @Override
@@ -152,9 +165,9 @@ public class GlideUtils {
      */
     private static Bitmap roundCrop(BitmapPool pool, Bitmap source) {
         if (source == null) return null;
-        Bitmap result = pool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap result = pool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_4444);
         if (result == null) {
-            result = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
+            result = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_4444);
         }
         Canvas canvas = new Canvas();
         Paint paint = new Paint();
@@ -164,6 +177,58 @@ public class GlideUtils {
         RectF rectF = new RectF(0f, 0f, source.getWidth(), source.getHeight());
         canvas.drawRoundRect(rectF, radius, radius, paint);
         return result;
+    }
+
+    /**
+     * 缩放bitmap
+     *
+     * @param bitmap
+     * @return
+     */
+    public static Bitmap zoomBitmap(Bitmap bitmap) {
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(0.7f, 0.7f);
+        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+
+        return bitmap;
+    }
+
+    /**
+     * 加水印
+     *
+     * @param bitmap
+     * @return
+     */
+    public static Bitmap addLogo(Bitmap bitmap, Context context) {
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+
+        Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon, options);
+        int size = 100;
+        int height = bmp.getHeight() * size / bmp.getWidth();
+        options.outWidth = 100;
+        options.outHeight = height;
+        options.inJustDecodeBounds = false;
+        Bitmap logo = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon, options);
+
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+        int lw = logo.getWidth();
+        int lh = logo.getHeight();
+
+        Bitmap newb = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_4444);
+        Canvas canvas = new Canvas(newb);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+
+        Paint paint = new Paint();
+        paint.setAlpha(50);
+
+        canvas.drawBitmap(logo, w - lw + 5, h - lh + 5, null);
+        canvas.save(Canvas.ALL_SAVE_FLAG);//保存
+        canvas.restore();//储存
+        return newb;
     }
 
 }

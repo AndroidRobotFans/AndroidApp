@@ -1,10 +1,13 @@
 package com.one.duanone.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,8 +15,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.one.duanone.R;
+import com.one.duanone.activity.CommentAcitivyt;
+import com.one.duanone.activity.LiveActivity;
 import com.one.duanone.bean.News;
+import com.one.duanone.manager.MediaManager;
 import com.one.duanone.utils.GlideUtils;
+import com.one.duanone.utils.ToastUtils;
 import com.one.duanone.utils.Utils;
 
 import java.util.List;
@@ -48,17 +55,15 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         //获取itemType的值, 判断其消息类型
         int itemType = getItemViewType(position);
-        News.User user = null;
-
+        final News.User user = null;
 
         //是否是直播
         boolean isLiveing = list.get(position).isLive();
         String name = null;
         String iconUrl = null;
-
 
         //不是直播
         if (!isLiveing) {
@@ -100,7 +105,6 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                 holder.imagePlay.setVisibility(View.GONE);
             }
 
-
             setTextView(content, holder.content);
             setTextView(name, holder.name);
             setUserIcon(iconUrl, holder.icon);
@@ -111,7 +115,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             setTextCount(diggCount, holder.digg_count);
             setTextCount(shareCount, holder.share_count);
             setTextCount(commentCount, holder.comment_count);
+
+            initImage(group, holder);
+
         } else {
+            //直播类型
             News.LiveNew liveNew = null;
             liveNew = list.get(position).getLiveNew();
             setUserContent(holder, liveNew.getUser());//设置用户信息
@@ -121,6 +129,159 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             city = TextUtils.isEmpty(city) ? "未知星球" : city;
             setTextView(city, holder.city);
         }
+
+        //点击用户头像,跳转用户信息
+        holder.icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                News.Group group = list.get(position).getGroup();
+                Intent intent = new Intent(context, CommentAcitivyt.class);
+                int groupId = group.getGroup_id();
+                int userId = group.getUser().getUser_id();
+                intent.putExtra("groupId", groupId);
+                intent.putExtra("userId", userId);
+                context.startActivity(intent);
+            }
+        });
+        if (!isLiveing) {
+            //非直播
+            if (holder.buryImg != null)
+                holder.buryImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        News.Group group = list.get(position).getGroup();
+                        if (isNotLick(group)) {
+                            int count = group.getBury_count();
+                            count++;
+                            ToastUtils.showMoveToast(holder.bury_count, count + "", context);
+                            group.setBury_count(count);
+                            setTextCount(count, holder.bury_count);
+                            notifyDataSetChanged();
+                            group.setBury(true);
+                            holder.buryImg.setImageResource(R.drawable.ic_bury_pressed);
+                        }
+                    }
+                });
+            if (holder.diggImg != null)
+                holder.diggImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        News.Group group = list.get(position).getGroup();
+                        if (isNotLick(group)) {
+                            int count = group.getDigg_count();
+                            count++;
+                            setTextCount(count, holder.digg_count);
+                            group.setDigg_count(count);
+                            notifyDataSetChanged();
+                            group.setDigg(true);
+                            holder.diggImg.setImageResource(R.drawable.ss_comment_digg_highlight);
+                        }
+                    }
+                });
+            if (holder.commentImg != null)
+                holder.commentImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        News.Group group = list.get(position).getGroup();
+                        Intent intent = new Intent(context, CommentAcitivyt.class);
+                        int groupId = group.getGroup_id();
+                        int userId = group.getUser().getUser_id();
+                        intent.putExtra("groupId", groupId);
+                        intent.putExtra("userId", userId);
+                        context.startActivity(intent);
+                    }
+                });
+            if (holder.shareImg != null)
+                holder.shareImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtils.showToast("随机分享完成", context);
+                    }
+                });
+            //播放按钮
+            if (itemType == 3) {
+                final ProgressDialog pd = new ProgressDialog(context);
+                final String url = list.get(position).getGroup().getOriginVideo().getOrigin_video_url();
+                final MediaManager.PlayListener listener = new MediaManager.PlayListener() {
+                    @Override
+                    public void notPlay() {
+                        holder.surfaceView.setVisibility(View.GONE);
+                        holder.vdieo_layout_bg.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void prepared() {
+                        pd.dismiss();
+                        holder.vdieo_layout_bg.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void playing(int current, int duration) {
+
+                    }
+                };
+
+                holder.imagePlay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pd.show();
+                        holder.surfaceView.setVisibility(View.VISIBLE);
+                        MediaManager.getInstance(holder.surfaceView).paly(url, listener);
+                    }
+                });
+            }
+        } else {
+            //直播
+            if (holder.imagePlay != null)
+                holder.imagePlay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        News.LiveNew liveNew = list.get(position).getLiveNew();
+                        int groupId = liveNew.getId();
+                        Intent intent = new Intent(context, LiveActivity.class);
+                        intent.putExtra("groupId", groupId);
+                        context.startActivity(intent);
+                        holder.surfaceView.setVisibility(View.VISIBLE);
+                    }
+                });
+        }
+    }
+
+    private void initImage(News.Group group, ViewHolder holder) {
+        boolean bury = group.isBury();
+        boolean digg = group.isDigg();
+        int bugyId = 0;
+        int diggId = 0;
+        if (bury) {
+            bugyId = R.drawable.ic_bury_pressed;
+        } else {
+            bugyId = R.drawable.ic_bury_normal;
+        }
+        if (digg) {
+            diggId = R.drawable.ss_comment_digg_highlight;
+        } else {
+            diggId = R.drawable.ss_comment_digg_normal;
+        }
+        holder.buryImg.setImageResource(bugyId);
+        holder.diggImg.setImageResource(diggId);
+    }
+
+    /**
+     * 是否有过操作
+     *
+     * @param group
+     * @return
+     */
+    private boolean isNotLick(News.Group group) {
+        boolean isBury = group.isBury();
+        boolean isDigg = group.isDigg();
+        if (isBury) {
+            ToastUtils.showToast(context.getString(R.string.youHaveIsBury), context);
+        }
+        if (isDigg) {
+            ToastUtils.showToast(context.getString(R.string.youHaveIsDigg), context);
+        }
+        return !isBury && !isDigg;
     }
 
     /**
@@ -233,6 +394,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         RelativeLayout vdieo_layout_bg;//视频显示详情的布局, 默认是gone的
         TextView userCount;
         TextView city;
+        SurfaceView surfaceView;
+
+        ImageView diggImg, buryImg, commentImg, shareImg;
 
         View item;
 
@@ -254,6 +418,13 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             vdieo_play_count = $(R.id.play_item_count_recycler);
             userCount = $(R.id.user_count_item_recycler);
             city = $(R.id.city_item_recycle);
+
+            surfaceView = $(R.id.surface_item_inner);
+
+            diggImg = $(R.id.digg_img_item_recycle);
+            buryImg = $(R.id.bury_img_item_recycle);
+            commentImg = $(R.id.comment_img_item_recycle);
+            shareImg = $(R.id.share_img_item_recycle);
         }
 
         /**
@@ -278,6 +449,4 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         this.list = list;
         notifyDataSetChanged();
     }
-
-
 }
