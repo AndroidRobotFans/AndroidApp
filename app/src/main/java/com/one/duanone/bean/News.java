@@ -127,6 +127,30 @@ public class News {
          * 视屏消息的内容
          */
         private OriginVideo originVideo;
+        /**
+         * 已经踩过
+         */
+        private boolean isBury;
+        /**
+         * 以及顶过
+         */
+        private boolean isDigg;
+
+        public boolean isBury() {
+            return isBury;
+        }
+
+        public void setBury(boolean bury) {
+            isBury = bury;
+        }
+
+        public boolean isDigg() {
+            return isDigg;
+        }
+
+        public void setDigg(boolean digg) {
+            isDigg = digg;
+        }
 
         public OriginVideo getOriginVideo() {
             return originVideo;
