@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".fragment.PersonalFragment" />
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".fragment.ContributeFragment" />
+        <activity android:name=".fragment.MessageCtributeFragment"></activity>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/message_contribute_rl"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
@@ -48,6 +49,7 @@
         />
 
     <RelativeLayout
+        android:id="@+id/message_collect_rl"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
@@ -86,6 +88,7 @@
         />
 
     <RelativeLayout
+        android:id="@+id/message_comment_rl"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"

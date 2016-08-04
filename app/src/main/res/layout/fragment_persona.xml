@@ -202,47 +202,32 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/personal_contributes"
                     style="@style/HorizontalTextViewStyle"
                     android:text="@string/contributes" />
 
                 <TextView
+                    android:id="@+id/personal_collect"
                     style="@style/HorizontalTextViewStyle"
                     android:text="@string/collect" />
 
                 <TextView
+                    android:id="@+id/personal_comment"
                     style="@style/HorizontalTextViewStyle"
                     android:text="@string/comment" />
 
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/personal_frame"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/personal_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/personal_linear"
                 android:background="@color/gray_1">
 
-            </android.support.v7.widget.RecyclerView>
+            </android.support.v4.view.ViewPager>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/personal_linear"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:background="@drawable/ic_no_publish" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="不会发段子的土豪不是好逗逼" />
-            </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

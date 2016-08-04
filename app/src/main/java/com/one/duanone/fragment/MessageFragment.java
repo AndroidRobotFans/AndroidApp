@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.one.duanone.R;
@@ -24,13 +25,23 @@ public class MessageFragment extends CenterFragment {
     private TextView rightText;
     private TextView centerText;
     private BlackListFragment blackListFragment;
-
+    private RelativeLayout contributeRelativeLayout,collectRelativeLayout,commentRelativeLayout;
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = View.inflate(getContext(), R.layout.message_view, null);
-
+        contributeRelativeLayout= (RelativeLayout) view.findViewById(R.id.message_contribute_rl);
+        contributeRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener!=null){
+                    showContributeFragment();
+                }
+            }
+        });
+        collectRelativeLayout= (RelativeLayout) view.findViewById(R.id.message_collect_rl);
+        commentRelativeLayout= (RelativeLayout) view.findViewById(R.id.message_comment_rl);
 
         return view;
     }

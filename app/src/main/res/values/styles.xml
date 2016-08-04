@@ -42,7 +42,7 @@
     <style name="HorizontalTextViewStyle" parent="HorizontalParent">
         <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@drawable/text_selected_accent</item>
+        <item name="android:textColor">@color/gray</item>
     </style>
 
     <!-- 顶部RadioButton的样式 -->

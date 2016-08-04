@@ -106,6 +106,7 @@ public class TabIndicator extends HorizontalScrollView {
             });
 
         }
+        setState(0);
     }
 
     public void setPagetListener(HomeFragment.OnPagerChangeListener pagerListener) {
@@ -122,18 +123,18 @@ public class TabIndicator extends HorizontalScrollView {
             return;
         }
         TabView tabView = (TabView) linearLayout.getChildAt(state);
-        if (currentTextView != null) {
-            currentTextView.setTextColor(getContext().getResources().getColor(R.color.coffee2));
-        }
-        if (pagerChangeListener != null) {
-            pagerChangeListener.onPagerChange(state);
-        }
-        currentTextView = tabView;
-        currentTextView.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
+        setTextPager(tabView);
         if (viewPager != null && viewPager.getCurrentItem() != state) {
             //切换viewPager
             viewPager.setCurrentItem(state);
         }
+    }
+    public void setTextPager(TextView current) {
+
+        if (currentTextView != null)
+            currentTextView.setTextColor(getContext().getResources().getColor(R.color.gray));
+        current.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
+        currentTextView=current;
     }
 
     class TabView extends TextView {

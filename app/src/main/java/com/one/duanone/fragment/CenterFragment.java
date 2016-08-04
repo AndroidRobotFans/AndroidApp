@@ -18,6 +18,7 @@ public abstract class CenterFragment extends BaseFragment {
     private TitleFragment.OnChangeTitleView changListener;
     private boolean isSecond = false;
     private PersonalFragment personalFragment;
+    private MessageCtributeFragment messageCtributeFragment;
 
     //shit
     public abstract View getLeftView();
@@ -105,6 +106,12 @@ public abstract class CenterFragment extends BaseFragment {
             personalFragment = new PersonalFragment();
         listener.showFragment(personalFragment);
     }
+    public void showContributeFragment(){
+        if (messageCtributeFragment == null)
+            messageCtributeFragment = new MessageCtributeFragment();
+        listener.showFragment(messageCtributeFragment);
+    }
+
     public interface ShowCenterFragment {
         void showFragment(NotableFragment fragment);
     }
