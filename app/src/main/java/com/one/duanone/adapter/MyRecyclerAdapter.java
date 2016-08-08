@@ -3,9 +3,11 @@ package com.one.duanone.adapter;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
@@ -108,6 +110,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             setTextView(content, holder.content);
             setTextView(name, holder.name);
             setUserIcon(iconUrl, holder.icon);
+
             setImage(holder.image, imageUrl);
             Log.i(TAG, "onBindViewHolder: " + imageUrl);
 
@@ -124,6 +127,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             liveNew = list.get(position).getLiveNew();
             setUserContent(holder, liveNew.getUser());//设置用户信息
             setImage(holder.image, liveNew.getImgUrl());//设置图片
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) holder.image.getLayoutParams();
+            lp.width = RelativeLayout.LayoutParams.WRAP_CONTENT;
+            lp.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+            holder.image.setLayoutParams(lp);
+
             setTextCount(liveNew.getUser_count(), holder.userCount); //观看人数
             String city = liveNew.getCity();
             city = TextUtils.isEmpty(city) ? "未知星球" : city;
@@ -238,10 +246,19 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                     public void onClick(View v) {
                         News.LiveNew liveNew = list.get(position).getLiveNew();
                         int groupId = liveNew.getId();
+                        String url = liveNew.getLiveUrl();
+                        String icon = liveNew.getUser().getAvatar_url();
+                        String name = liveNew.getUser().getName();
+                        int id = liveNew.getUser().getUser_id();
+
                         Intent intent = new Intent(context, LiveActivity.class);
                         intent.putExtra("groupId", groupId);
+                        intent.putExtra("url", url);
+                        intent.putExtra("icon", icon);
+                        intent.putExtra("id", id);
+                        intent.putExtra("name", name);
+
                         context.startActivity(intent);
-                        holder.surfaceView.setVisibility(View.VISIBLE);
                     }
                 });
         }
@@ -395,6 +412,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         TextView userCount;
         TextView city;
         SurfaceView surfaceView;
+
 
         ImageView diggImg, buryImg, commentImg, shareImg;
 

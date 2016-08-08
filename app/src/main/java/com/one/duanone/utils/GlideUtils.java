@@ -6,14 +6,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import com.bumptech.glide.DrawableRequestBuilder;
+import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.one.duanone.R;
@@ -39,7 +45,8 @@ public class GlideUtils {
         if (url == null) {
             return;
         }
-        Glide.with(context).load(url).into(image);
+        Glide.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).into(image);
+//        Glide.with(context).load(url).placeholder(R.drawable.ugc_tip_loading_essay_night).error(R.drawable.ic_nearby_empty_list_night).diskCacheStrategy(DiskCacheStrategy.ALL).into(image);
     }
 
     /**
@@ -53,7 +60,8 @@ public class GlideUtils {
         if (url == null) {
             return;
         }
-        Glide.with(context).load(url).transform(new GlideCircleTransform(context)).into(image);
+        Glide.with(context).load(url).transform(new GlideCircleTransform(context)).diskCacheStrategy(DiskCacheStrategy.ALL).into(image);
+//        Glide.with(context).load(url).transform(new GlideCircleTransform(context)).placeholder(R.drawable.ugc_tip_loading_essay_night).error(R.drawable.ic_nearby_empty_list_night).diskCacheStrategy(DiskCacheStrategy.ALL).into(image);
     }
 
     /**
@@ -69,8 +77,10 @@ public class GlideUtils {
             return;
         }
         radius = round;
-        Glide.with(context).load(url).transform(new GlideRoundTransform(context)).into(image);
+        Glide.with(context).load(url).transform(new GlideRoundTransform(context)).diskCacheStrategy(DiskCacheStrategy.ALL).into(image);
+//        Glide.with(context).load(url).transform(new GlideRoundTransform(context)).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ugc_tip_loading_essay_night).error(R.drawable.ic_nearby_empty_list_night).into(image);
     }
+
 
     /**
      * Created DKL 圆形工具

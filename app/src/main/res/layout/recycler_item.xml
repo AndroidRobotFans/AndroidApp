@@ -140,7 +140,8 @@
 
                 <ImageView
                     android:id="@+id/digg_img_item_recycle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ss_comment_digg_normal" />
 

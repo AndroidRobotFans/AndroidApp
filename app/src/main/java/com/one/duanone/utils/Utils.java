@@ -1,9 +1,13 @@
 package com.one.duanone.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,6 +91,7 @@ public class Utils {
 
     /**
      * 将字符串写到文件中
+     *
      * @param str
      */
     public static void outputFileString(String str) {
@@ -107,11 +112,11 @@ public class Utils {
             dir.mkdirs();
         }
 
-        File file = new File(dir, nams[i]+".txt");
-        if (file.exists()){
+        File file = new File(dir, nams[i] + ".txt");
+        if (file.exists()) {
             i++;
-            file = new File(dir, nams[i]+".txt");
-        }else {
+            file = new File(dir, nams[i] + ".txt");
+        } else {
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -128,6 +133,22 @@ public class Utils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.i("TAG", "outputFileString: 写入成功"+nams[i]+dir.getAbsolutePath());
+        Log.i("TAG", "outputFileString: 写入成功" + nams[i] + dir.getAbsolutePath());
+    }
+
+    /**
+     * 获取屏幕宽高
+     * @param context
+     * @return
+     */
+    public static int[] getWindowSize(Context context) {
+        int w = 0;
+        int h = 0;
+        Display display = ((Activity) context).getWindowManager().getDefaultDisplay();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        display.getMetrics(displayMetrics);
+        w = (int) (displayMetrics.widthPixels / displayMetrics.density);
+        h = (int) (displayMetrics.heightPixels / displayMetrics.density);
+        return new int[]{w, h};
     }
 }

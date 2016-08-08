@@ -47,13 +47,9 @@ public class InnerFragment extends BaseFragment {
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             String json = response.body().string();
-            Log.i(TAG, "onResponse: JSON请求成功");
-            //写到文件中
-//                Utils.outputFileString(json);
-            listData.addAll(0, JsonUtils.getJsonNews(json));
-            if (listData.size() == 0) {
+            Log.i(TAG, "onResponse===: JSON请求成功");
 
-            }
+            listData.addAll(0, JsonUtils.getJsonNews(json));
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -70,6 +66,7 @@ public class InnerFragment extends BaseFragment {
             getData(RequestType.REFRESH);
         }
     };
+
 
     private void resetPullRefresh() {
         getActivity().runOnUiThread(new Runnable() {
@@ -98,6 +95,7 @@ public class InnerFragment extends BaseFragment {
         recyclerAdapter = new MyRecyclerAdapter(listData, getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(recyclerAdapter);
+
         getData(RequestType.REFRESH);
         return view;
     }
@@ -119,6 +117,9 @@ public class InnerFragment extends BaseFragment {
 
     }
 
+    /**
+     * 枚举类, 标记请求方式
+     */
     public enum RequestType {
         REFRESH, LOAD
     }

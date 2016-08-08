@@ -85,7 +85,6 @@ public class MediaManager implements SurfaceHolder.Callback {
     public void paly(String url, PlayListener listener) {
         this.url = url;
         this.listener = listener;
-        mediaPlayer.setOnPreparedListener(preparedListener);
         surfaceHolder.setKeepScreenOn(true);
         surfaceHolder.addCallback(this);
         surfaceHolder.addCallback(this);
@@ -132,14 +131,16 @@ public class MediaManager implements SurfaceHolder.Callback {
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);//设置音乐流的类型
             mediaPlayer.setDisplay(holder);//设置video影片以surfaceviewholder播放
             mediaPlayer.setDataSource(url);//设置路径
+            mediaPlayer.setOnPreparedListener(preparedListener);
+            mediaPlayer.setOnCompletionListener(completionListener);
             mediaPlayer.prepare();//缓冲
             mediaPlayer.start();//播放
-            mediaPlayer.setOnCompletionListener(completionListener);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        mediaPlayer.start();
+
     }
 
     @Override

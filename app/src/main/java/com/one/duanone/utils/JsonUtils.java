@@ -239,6 +239,8 @@ public class JsonUtils {
             JSONArray url_list = large_image.optJSONArray("url_list");
             String url = url_list.optJSONObject(0).optString("url");
             imageNew.setImgUrl(url);
+            imageNew.setR_height(large_image.optInt("r_height"));
+            imageNew.setR_width(large_image.optInt("r_width"));
             return imageNew;
         }
         JSONObject middle_image = jsonObj.optJSONObject("middle_image");
@@ -246,6 +248,8 @@ public class JsonUtils {
             JSONArray url_list = middle_image.optJSONArray("url_list");
             String url = url_list.optJSONObject(0).optString("url");
             imageNew.setImgUrl(url);
+            imageNew.setR_width(middle_image.optInt("r_width"));
+            imageNew.setR_height(middle_image.optInt("r_height"));
             return imageNew;
         }
         return null;

@@ -50,7 +50,7 @@ public class TabIndicator extends HorizontalScrollView {
     public TabIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
         linearLayout = (LinearLayout) View.inflate(context, R.layout.indication_layout, null);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 50);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         //设置LinearLayout的样式
         linearLayout.setLayoutParams(lp);
         this.addView(linearLayout);
