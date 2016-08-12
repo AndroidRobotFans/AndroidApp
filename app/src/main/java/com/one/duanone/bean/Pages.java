@@ -7,6 +7,7 @@ package com.one.duanone.bean;
 public class Pages {
     private String pageUrl;
     private String pageTitle;
+    private int k;
 
     public String getPageUrl() {
         return pageUrl;
