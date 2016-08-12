@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/contribute_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_digupicon_review"
+            android:layout_margin="10dp"
+            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/contribute_image"
+            android:layout_marginTop="14dp"
+            >
+
+        <TextView
+            android:id="@+id/contribute_name_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blacklist"
+            android:textSize="20sp"
+            />
+            <TextView
+                android:id="@+id/contribute_time_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="07-07 20:04"
+                android:layout_below="@+id/contribute_name_textview"
+                android:layout_marginTop="8dp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contribute_image"
+            android:layout_marginLeft="15dp"
+            >
+            <LinearLayout
+                android:id="@+id/contribute_praise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ss_comment_digg_highlight"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+ 1"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginTop="10dp"
+                    />
+            </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="算我一个"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/contribute_comment"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:text="一成够不够,够不够"
+            android:textSize="15sp"
+            android:padding="5dp"
+            android:background="@color/gray_1"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            />
+    </RelativeLayout>
+</LinearLayout>

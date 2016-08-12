@@ -106,10 +106,9 @@ public abstract class CenterFragment extends BaseFragment {
             personalFragment = new PersonalFragment();
         listener.showFragment(personalFragment);
     }
-    public void showContributeFragment(){
-        if (messageCtributeFragment == null)
-            messageCtributeFragment = new MessageCtributeFragment();
-        listener.showFragment(messageCtributeFragment);
+    public void showContributeFragment(NotableFragment fragment){
+        if (fragment != null)
+        listener.showFragment(fragment);
     }
 
     public interface ShowCenterFragment {

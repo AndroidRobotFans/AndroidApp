@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.one.duanone.R;
+import com.one.duanone.bean.News;
+import com.one.duanone.utils.GlideUtils;
 
 import java.util.List;
 
@@ -17,10 +19,10 @@ import java.util.List;
  */
 public class BlackListAdapter extends BaseAdapter {
 
-    List<String> list;
+    List<News.User> list;
     Context context;
 
-    public BlackListAdapter(List<String> list, Context context) {
+    public BlackListAdapter(List<News.User> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -51,7 +53,11 @@ public class BlackListAdapter extends BaseAdapter {
             convertView.setTag(holder);
         }else {
             holder= (ViewHolder) convertView.getTag();
+
         }
+        holder.userName.setText(list.get(position).getName());
+        holder.removetv.setText("移除.");
+        GlideUtils.urlCircleImage(context,list.get(position).getAvatar_url(),holder.userImage);
         return convertView;
     }
 

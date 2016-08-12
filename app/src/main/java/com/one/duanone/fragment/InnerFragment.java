@@ -36,6 +36,7 @@ public class InnerFragment extends BaseFragment {
     private List<News> listData;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+
     private Callback callback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {

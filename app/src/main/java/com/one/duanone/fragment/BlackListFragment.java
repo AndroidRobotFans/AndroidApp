@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.one.duanone.R;
 import com.one.duanone.adapter.BlackListAdapter;
+import com.one.duanone.bean.News;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class BlackListFragment extends NotableFragment {
     private TextView rightText;
     private View view;
     private ListView listView;
-    private List<String> list;
+    private List<News.User> list;
     private BlackListAdapter mAdapter;
 
     @Override
@@ -37,12 +38,13 @@ public class BlackListFragment extends NotableFragment {
     }
 
     private void initView() {
-        listView = (ListView) view.findViewById(R.id.blacklist_listview);
+        listView = (ListView) view.findViewById(R.id.attention_listview);
         list = new ArrayList<>();
         mAdapter = new BlackListAdapter(list, getContext());
         for (int i = 0; i < 10; i++) {
-
-            list.add("羊羊羊");
+            News.User user=new News.User();
+            user.setName("一一");
+            list.add(user);
         }
         listView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:id="@+id/system_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+        <ImageView
+            android:id="@+id/system_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_activity_mark"
+            android:layout_margin="10dp"
+            />
+
+        <TextView
+            android:id="@+id/system_name_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/system"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            />
+        </LinearLayout>
+            <TextView
+                android:id="@+id/system_time_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="07-07 20:04"
+                android:layout_marginLeft="12dp"
+                android:layout_below="@+id/system_linear"
+                />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/system_time_textview"
+            android:layout_marginLeft="12dp"
+            android:layout_toLeftOf="@+id/system_comment"
+            >
+
+                <TextView
+                    android:id="@+id/system_inform_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="恭喜!你的投稿已经通过审核,成功发表!"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/system_comment"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:text="一成够不够,够不够"
+            android:textSize="15sp"
+            android:padding="5dp"
+            android:background="@color/gray_1"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            />
+    </RelativeLayout>
+</LinearLayout>

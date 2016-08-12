@@ -1,6 +1,5 @@
 package com.one.duanone.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +23,9 @@ public class MessageFragment extends CenterFragment {
     private ImageView leftImage;
     private TextView rightText;
     private TextView centerText;
+    private TextView centerText1;
     private BlackListFragment blackListFragment;
-    private RelativeLayout contributeRelativeLayout,collectRelativeLayout,commentRelativeLayout;
+    private RelativeLayout contributeRelativeLayout,systemRelativeLayout,fansRelativeLayout;
 
     @Override
     public View getFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,13 +36,28 @@ public class MessageFragment extends CenterFragment {
             @Override
             public void onClick(View v) {
                 if (listener!=null){
-                    showContributeFragment();
+                    showContributeFragment(new MessageCtributeFragment());
                 }
             }
         });
-        collectRelativeLayout= (RelativeLayout) view.findViewById(R.id.message_collect_rl);
-        commentRelativeLayout= (RelativeLayout) view.findViewById(R.id.message_comment_rl);
-
+        systemRelativeLayout= (RelativeLayout) view.findViewById(R.id.message_system_rl);
+        systemRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener!=null){
+                showContributeFragment(new MessageSystemFragment());
+                }
+            }
+        });
+        fansRelativeLayout= (RelativeLayout) view.findViewById(R.id.message_fans_rl);
+        fansRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener!=null){
+                showContributeFragment(new MessageFansFragment());
+                }
+            }
+        });
         return view;
     }
 

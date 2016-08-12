@@ -367,6 +367,43 @@ public class News {
          */
         private String avatar_url;
 
+        /**
+         * 发表评论时间
+         */
+        private int time;
+        /**
+         * 个人主页-自己以往的评论
+         */
+        private String personal_comment;
+        /**
+         * 系统通知
+         */
+        private String inform;
+
+        public String getInform() {
+            return inform;
+        }
+
+        public void setInform(String inform) {
+            this.inform = inform;
+        }
+
+        public String getPersonal_comment() {
+            return personal_comment;
+        }
+
+        public void setPersonal_comment(String personal_comment) {
+            this.personal_comment = personal_comment;
+        }
+
+        public int getTime() {
+            return time;
+        }
+
+        public void setTime(int time) {
+            this.time = time;
+        }
+
         public String getName() {
             return name;
         }
