@@ -8,8 +8,6 @@
     <LinearLayout
         android:id="@+id/home_linear"
         style="@style/TabBottomLinerStyle">
-
-
         <com.one.duanone.view.NoTouchImage
             android:id="@+id/home_image"
             style="@style/TabBottomImageStyle"
